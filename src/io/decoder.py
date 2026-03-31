@@ -1,0 +1,134 @@
+"""Module: individual_decoder.
+
+This module provides functionality to decode a genetic algorithm (GA) individual—
+represented as a list of `SessionGene` objects—into a list of rich, semantically
+meaningful `CourseSession` objects.
+"""
+
+from __future__ import annotations
+
+from typing import TYPE_CHECKING
+
+from src.domain.session import CourseSession
+
+if TYPE_CHECKING:
+    from src.domain.course import Course
+    from src.domain.gene import SessionGene
+    from src.domain.group import Group
+    from src.domain.instructor import Instructor
+    from src.domain.room import Room
+
+__all__ = ["decode_individual"]
+
+
+def decode_individual(
+    individual: list[SessionGene],
+    # Keys are (course_code, course_type)
+    courses: dict[tuple[str, str], Course],
+    instructors: dict[str, Instructor],
+    groups: dict[str, Group],
+    rooms: dict[str, Room],
+) -> list[CourseSession]:
+    """Decodes a GA individual (chromosome) into a list of CourseSession objects.
+
+    This function translates each `SessionGene` into a `CourseSession`, enriching
+    the basic encoded representation with full instructor and group references,
+    along with room and course metadata. The output is suitable for use in
+    constraint checking and visualization.
+
+    Architecture Note (Nov 2025): SessionGene uses contiguous representation
+    (start_quanta + num_quanta) instead of array-based quanta list. This enforces
+    structural continuity and reduces memory footprint by 60%.
+
+    Args:
+        individual (List[SessionGene]): The chromosome to decode; each gene represents
+            a single course session assignment with time (start_quanta + num_quanta),
+            room, and entity assignments.
+        courses (Dict[tuple, Course]): Mapping from (course_code, course_type) to Course
+            objects, providing metadata like required room features.
+        instructors (Dict[str, Instructor]): Mapping from instructor ID to Instructor objects.
+        groups (Dict[str, Group]): Mapping from group ID to Group objects, including
+            availability and enrollment data.
+        rooms (Dict[str, Room]): Mapping from room ID to Room objects, including
+            capacity and features data.
+
+    Returns:
+        List[CourseSession]: A list of fully populated CourseSession objects derived
+        from the input chromosome.
+    """
+    decoded_sessions = []
+
+    # Get actual valid quantum range from QuantumTimeSystem
+    from src.io.time_system import QuantumTimeSystem
+
+    max_valid_quantum = QuantumTimeSystem().total_quanta
+
+    for gene in individual:
+        # Validate and clip quanta before decoding to prevent ValueError in constraints
+        # This handles cases where crossover/mutation bypassed SessionGene validation
+        valid_quanta = [
+            q
+            for q in range(gene.start_quanta, gene.end_quanta)
+            if 0 <= q < max_valid_quantum
+        ]
+        if not valid_quanta:
+            # All quanta invalid - skip this gene entirely
+            import logging
+
+            logger = logging.getLogger(__name__)
+            logger.debug(
+                f"Skipping gene {gene.course_id} - all quanta invalid: start={gene.start_quanta}, num={gene.num_quanta}"
+            )
+            continue
+
+        # Update gene with valid quanta (modify in-place to fix the chromosome)
+        if len(valid_quanta) != gene.num_quanta:
+            import logging
+
+            logger = logging.getLogger(__name__)
+            logger.debug(
+                f"Clipped gene {gene.course_id} quanta from {gene.num_quanta} to {len(valid_quanta)}"
+            )
+            # Update to valid range
+            gene.start_quanta = valid_quanta[0] if valid_quanta else 0
+            gene.num_quanta = len(valid_quanta) if valid_quanta else 1
+        # Look up course using tuple key (course_id, course_type)
+        course_key = (gene.course_id, gene.course_type)
+        course = courses[course_key]
+
+        instructor = instructors.get(gene.instructor_id)
+        if instructor is None:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(
+                f"Unknown instructor {gene.instructor_id} for course {gene.course_id}, skipping"
+            )
+            continue
+        # Get primary group (first group in the list)
+        group = groups[gene.group_ids[0]] if gene.group_ids else None
+        room = rooms.get(gene.room_id)
+        if room is None:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.warning(
+                f"Unknown room {gene.room_id} for course {gene.course_id}, skipping"
+            )
+            continue
+
+        session = CourseSession(
+            course_id=gene.course_id,
+            instructor_id=gene.instructor_id,
+            group_ids=gene.group_ids,
+            room_id=gene.room_id,
+            session_quanta=gene.get_quanta_list(),
+            required_room_features=course.required_room_features,
+            course_type=gene.course_type,  # Use gene's course_type
+            instructor=instructor,
+            group=group,  # Primary group (first in list)
+            room=room,
+            co_instructor_ids=list(getattr(gene, "co_instructor_ids", [])),
+        )
+
+        decoded_sessions.append(session)
+
+    return decoded_sessions

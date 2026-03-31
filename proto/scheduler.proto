@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package scheduler;
+
+// SchedulerEngine — runs as a standalone gRPC service
+service SchedulerEngine {
+  // Run schedule optimization. Streams progress updates, then final result.
+  rpc RunSchedule(ScheduleRequest) returns (stream ScheduleUpdate);
+
+  // Validate input data (health check) without running the solver.
+  rpc ValidateData(ValidateRequest) returns (ValidateResponse);
+
+  // Service liveness check.
+  rpc Ping(PingRequest) returns (PingResponse);
+}
+
+// ── RunSchedule ──────────────────────────────────────────────
+
+message ScheduleRequest {
+  string job_id           = 1;
+  // Input data as raw JSON strings
+  string courses_json     = 2;
+  string groups_json      = 3;
+  string instructors_json = 4;
+  string rooms_json       = 5;
+  // Algorithm parameters
+  int32  generations      = 6;
+  int32  population_size  = 7;
+  int32  seed             = 8;
+}
+
+enum UpdateType {
+  PROGRESS  = 0;
+  COMPLETED = 1;
+  FAILED    = 2;
+}
+
+message ScheduleUpdate {
+  string     job_id              = 1;
+  UpdateType type                = 2;
+  // Progress fields
+  int32  current_generation      = 3;
+  int32  total_generations       = 4;
+  float  progress_percentage     = 5;
+  float  best_hard               = 6;
+  float  best_soft               = 7;
+  string message                 = 8;
+  // Result fields (populated only when type == COMPLETED)
+  string results_json            = 9;
+  string schedule_json           = 10;
+  // Error fields (populated only when type == FAILED)
+  string error_message           = 11;
+  float  elapsed_seconds         = 12;
+}
+
+// ── ValidateData ─────────────────────────────────────────────
+
+message ValidateRequest {
+  string courses_json     = 1;
+  string groups_json      = 2;
+  string instructors_json = 3;
+  string rooms_json       = 4;
+}
+
+message ValidationIssue {
+  string category = 1;
+  string severity = 2;
+  string message  = 3;
+}
+
+message ValidateResponse {
+  bool   valid        = 1;
+  float  health_score = 2;
+  repeated ValidationIssue issues = 3;
+  map<string, int32> stats        = 4;
+}
+
+// ── Ping ─────────────────────────────────────────────────────
+
+message PingRequest {}
+
+message PingResponse {
+  string status  = 1;
+  string version = 2;
+}

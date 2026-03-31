@@ -1,0 +1,6257 @@
+[
+  {
+    "id": "I1",
+    "name": "Govinda Acharya",
+    "courses": [
+      {
+        "coursecode": "IE652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I3",
+    "name": "Badri Prasad Adhikari",
+    "courses": [
+      {
+        "coursecode": "AM751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME654",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I5",
+    "name": "Bishal Kumar",
+    "courses": [
+      {
+        "coursecode": "AM651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 106",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEE 307",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE757",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 307",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 308",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAM 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I6",
+    "name": "Sadhuram Lamichhane",
+    "courses": [
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I7",
+    "name": "Ram Kumar Joshi",
+    "courses": [
+      {
+        "coursecode": "ENME 106",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I8",
+    "name": "Pratik Adhikari",
+    "courses": [
+      {
+        "coursecode": "ENAM 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME760",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME760",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I9",
+    "name": "Sabin Paudyal",
+    "courses": [
+      {
+        "coursecode": "CE655",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I10",
+    "name": "Gautam Das Tuladhar",
+    "courses": [
+      {
+        "coursecode": "ENME 106",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I11",
+    "name": "Bibek Dhungana",
+    "courses": [
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME751",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I13",
+    "name": "Sunil Adhikari",
+    "courses": [
+      {
+        "coursecode": "AM651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME651",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I14",
+    "name": "Bikki Chhantyal",
+    "courses": [
+      {
+        "coursecode": "AM785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I15",
+    "name": "Laxman Palikhel",
+    "courses": [
+      {
+        "coursecode": "AM653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAM 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAM 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 308",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I16",
+    "name": "Dharma Maharjan",
+    "courses": [
+      {
+        "coursecode": "AM751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME654",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I17",
+    "name": "Sugam Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME655",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I18",
+    "name": "Pramod Shrestha",
+    "courses": [
+      {
+        "coursecode": "AM653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE755",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I19",
+    "name": "Sunny Pradhan",
+    "courses": [
+      {
+        "coursecode": "AM751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME654",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I20",
+    "name": "Narad Kumar Rai",
+    "courses": [
+      {
+        "coursecode": "AM751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME654",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I21",
+    "name": "Sajendra Man Bajracharya",
+    "courses": [
+      {
+        "coursecode": "ENAM 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I27",
+    "name": "Saru Manandhar",
+    "courses": [
+      {
+        "coursecode": "ENAR 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "12:15",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I28",
+    "name": "Shirish Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I31",
+    "name": "Shreejana Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENAR 201",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "11:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I32",
+    "name": "Santosh Sigdel",
+    "courses": [
+      {
+        "coursecode": "ENAR 105",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:00",
+          "end": "15:15"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I33",
+    "name": "Bhanu Kumar Shrestha",
+    "courses": [
+      {
+        "coursecode": "ENIE 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I35",
+    "name": "Gyanendra Kumar Kurmi",
+    "courses": [
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "12:15",
+          "end": "13:45"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I37",
+    "name": "Amrit Ghimire",
+    "courses": [
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I38",
+    "name": "Bibat Thokar",
+    "courses": [
+      {
+        "coursecode": "ENEX 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        },
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I39",
+    "name": "Kiran Chandra Dahal",
+    "courses": [
+      {
+        "coursecode": "CE752",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 325-344",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 325-344",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 303",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX653",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I40",
+    "name": "Devendra Kathayat",
+    "courses": [
+      {
+        "coursecode": "ENEX 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "14:00",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "14:00",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I41",
+    "name": "Shiv Kumar Shah",
+    "courses": [
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I43",
+    "name": "Deep Raj Bhujel",
+    "courses": [
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "15:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I45",
+    "name": "Dr. Bipun Man Pati",
+    "courses": [
+      {
+        "coursecode": "CT653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 325-344",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I46",
+    "name": "Prajal Pradhan",
+    "courses": [
+      {
+        "coursecode": "AR651",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "12:15",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I47",
+    "name": "Bidita Shakya",
+    "courses": [
+      {
+        "coursecode": "AR765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AR765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 301",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "15:15"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "07:00",
+          "end": "10:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I49",
+    "name": "Ashok Krishna Sainju",
+    "courses": [
+      {
+        "coursecode": "ENAR 104",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 201",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "11:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I51",
+    "name": "Mayank Kumar Thakur",
+    "courses": [
+      {
+        "coursecode": "CE651",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I53",
+    "name": "Rabindra Gautam",
+    "courses": [
+      {
+        "coursecode": "ENAR 301",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "15:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I59",
+    "name": "Nishaj Kunwar",
+    "courses": [
+      {
+        "coursecode": "AR651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I61",
+    "name": "Samita Shrestha",
+    "courses": [
+      {
+        "coursecode": "AR752",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "07:00",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "09:15",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I64",
+    "name": "Neki Chipalu",
+    "courses": [
+      {
+        "coursecode": "AR753",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "11:30",
+          "end": "13:45"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "15:15"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "07:00",
+          "end": "08:30"
+        },
+        {
+          "start": "12:15",
+          "end": "13:45"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I65",
+    "name": "Sanjaya Maharjan",
+    "courses": [
+      {
+        "coursecode": "AR765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 204",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I66",
+    "name": "Amrit Jeev Tamrakar",
+    "courses": [
+      {
+        "coursecode": "ENAR 104",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 105",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 105",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 205",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 208",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I67",
+    "name": "Sudeep Sharma Paudyal",
+    "courses": [
+      {
+        "coursecode": "AR652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR752",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I68",
+    "name": "Timila Bajracharya",
+    "courses": [
+      {
+        "coursecode": "ENAR 205",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 303",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I69",
+    "name": "Bibek Karki",
+    "courses": [
+      {
+        "coursecode": "AR654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 202",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I70",
+    "name": "Shova Thapa",
+    "courses": [
+      {
+        "coursecode": "AR752",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 206",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 303",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 303",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I71",
+    "name": "Pradip Prasad Sah",
+    "courses": [
+      {
+        "coursecode": "ENEE 307",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 307",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I72",
+    "name": "Pravin Sangroula",
+    "courses": [
+      {
+        "coursecode": "CT651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT654",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I74",
+    "name": "Pradip Yadav",
+    "courses": [
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I75",
+    "name": "Hemant Joshi",
+    "courses": [
+      {
+        "coursecode": "CT 765 07",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:45",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I76",
+    "name": "Praches Acharya",
+    "courses": [
+      {
+        "coursecode": "CT651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 303",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT753",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I78",
+    "name": "Mukund Raj Joshi",
+    "courses": [
+      {
+        "coursecode": "ENSH 301",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "13:45"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "13:45"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I79",
+    "name": "Himal Bhandari",
+    "courses": [
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I82",
+    "name": "Nirupama Bashyal",
+    "courses": [
+      {
+        "coursecode": "CE655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 307",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX655",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I84",
+    "name": "Prajwol Pakka",
+    "courses": [
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I85",
+    "name": "Rajan Bhandari",
+    "courses": [
+      {
+        "coursecode": "ENCT 201",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I93",
+    "name": "Janardan Bhatta",
+    "courses": [
+      {
+        "coursecode": "CE752",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 785 03",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT657",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 301",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I95",
+    "name": "Suramya Sharma Dahal",
+    "courses": [
+      {
+        "coursecode": "EX656",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX654",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        },
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I96",
+    "name": "Sushan Raut",
+    "courses": [
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I97",
+    "name": "Prakash Paudel",
+    "courses": [
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I98",
+    "name": "Shanta Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENEE 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 307",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX757",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I99",
+    "name": "Bed Prasad Pandey",
+    "courses": [
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I100",
+    "name": "Smaran Dahal",
+    "courses": [
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I101",
+    "name": "Dinesh Shah",
+    "courses": [
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I103",
+    "name": "Shreekar Tiwari",
+    "courses": [
+      {
+        "coursecode": "ENEX 303",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX654",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "11:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I104",
+    "name": "Sudip Rana",
+    "courses": [
+      {
+        "coursecode": "ENSH 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 301",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "13:45"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "13:45"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "12:00",
+          "end": "14:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I105",
+    "name": "Sunil Thapa",
+    "courses": [
+      {
+        "coursecode": "CT657",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT657",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "13:45"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I110",
+    "name": "Saroj Shakya",
+    "courses": [
+      {
+        "coursecode": "CT 765 07",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT 765 07",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "17:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "17:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I111",
+    "name": "Suwarna Lingden",
+    "courses": [
+      {
+        "coursecode": "CT655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX656",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEE 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 305",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT657",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 80X XX",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX756",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I112",
+    "name": "Rajad Shakya",
+    "courses": [
+      {
+        "coursecode": "CT652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 325-344",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT654",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "13:45"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        },
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I115",
+    "name": "Hemanta Raj Khanal",
+    "courses": [
+      {
+        "coursecode": "ENSH 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 104",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I116",
+    "name": "Yubraj Thapa",
+    "courses": [
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I117",
+    "name": "Subodh Kumar Ravi",
+    "courses": [
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 202",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I118",
+    "name": "Sharmila Dangol",
+    "courses": [
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "15:15"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I120",
+    "name": "Anup Subedi",
+    "courses": [
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I122",
+    "name": "Pratigya KC Karki",
+    "courses": [
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "15:15"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I123",
+    "name": "Prabeen Kumar Awasthi",
+    "courses": [
+      {
+        "coursecode": "ENSH 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I124",
+    "name": "Prabin Shrestha",
+    "courses": [
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "15:15"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I126",
+    "name": "Bimal Ojha",
+    "courses": [
+      {
+        "coursecode": "CE751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I127",
+    "name": "Atul Bhandari",
+    "courses": [
+      {
+        "coursecode": "CE656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 305",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I128",
+    "name": "Abhash Acharya",
+    "courses": [
+      {
+        "coursecode": "CE765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I129",
+    "name": "Dr. Yadav Prasad Dhungana",
+    "courses": [
+      {
+        "coursecode": "SH754",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I130",
+    "name": "Sabita Basyal",
+    "courses": [
+      {
+        "coursecode": "ENSH 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 104",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I131",
+    "name": "Dr. Rup Narayan Shrestha",
+    "courses": [
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH754",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:45",
+          "end": "13:45"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "08:30",
+          "end": "10:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I132",
+    "name": "Shristy Pandey",
+    "courses": [
+      {
+        "coursecode": "ENIE 325-334",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENIE 325-334",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 206",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 309",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE671",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE655",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I134",
+    "name": "Bhupak Lal Joshi",
+    "courses": [
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I136",
+    "name": "Pradeep Adhikari",
+    "courses": [
+      {
+        "coursecode": "AR752",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I137",
+    "name": "Bijaya Kumar Tuladhar",
+    "courses": [
+      {
+        "coursecode": "ENAR 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 206",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 206",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 105",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 104",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 205",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 208",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I138",
+    "name": "Chinikaji Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENCE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I139",
+    "name": "Dr. Bhesh Kumar Karki",
+    "courses": [
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 305",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 305",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE652",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I140",
+    "name": "Tek Bahadur Budhathoki",
+    "courses": [
+      {
+        "coursecode": "ENSH 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I141",
+    "name": "Dr. Alin Chandra Shakya",
+    "courses": [
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 208",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I142",
+    "name": "Krishna Bhattarai",
+    "courses": [
+      {
+        "coursecode": "CE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 306",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 306",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 307",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE656",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I144",
+    "name": "Richa Adhikari",
+    "courses": [
+      {
+        "coursecode": "AR765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE659",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 206",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 303",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME760",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AR652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE657",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR753",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE761",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I145",
+    "name": "Govinda Prasad Poudel",
+    "courses": [
+      {
+        "coursecode": "CE654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 306",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 306",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I146",
+    "name": "Kalyan Paudyal",
+    "courses": [
+      {
+        "coursecode": "ENCE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I147",
+    "name": "Rajendra Bahadur Chhetri",
+    "courses": [
+      {
+        "coursecode": "ENCE 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I149",
+    "name": "Deepak Gautam",
+    "courses": [
+      {
+        "coursecode": "ENCE 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 102",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I151",
+    "name": "Kamal Poudel",
+    "courses": [
+      {
+        "coursecode": "ENCE 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 303",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I152",
+    "name": "Khem Raj Regmi",
+    "courses": [
+      {
+        "coursecode": "CE651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 303",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I153",
+    "name": "Keshab Acharya",
+    "courses": [
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I159",
+    "name": "Shubha Laxmi Ranjitakar",
+    "courses": [
+      {
+        "coursecode": "ENCE 305",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "12:15",
+          "end": "13:45"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I161",
+    "name": "Sushant Sapkota",
+    "courses": [
+      {
+        "coursecode": "ENCE 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 102",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I162",
+    "name": "Om Shanta Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I163",
+    "name": "Ramesh Karki",
+    "courses": [
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I164",
+    "name": "Kiran Lal Maharjan",
+    "courses": [
+      {
+        "coursecode": "ENCE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I165",
+    "name": "Sujan Tripathi",
+    "courses": [
+      {
+        "coursecode": "CE765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE765",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I168",
+    "name": "Bishworam Parajuli",
+    "courses": [
+      {
+        "coursecode": "ENIE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE671",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENIE 325-334",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I169",
+    "name": "Kamal Pokharel",
+    "courses": [
+      {
+        "coursecode": "ENIE 305",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENIE 325-334",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENIE 325-334",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 206",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 206",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 309",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE655",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I170",
+    "name": "Charchit Nagila",
+    "courses": [
+      {
+        "coursecode": "ENCE 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:45",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "10:45",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I177",
+    "name": "Lalit Bhatta",
+    "courses": [
+      {
+        "coursecode": "CE761",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I179",
+    "name": "Pradeep prasad Bhatta",
+    "courses": [
+      {
+        "coursecode": "CE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I182",
+    "name": "Rajesh Khadka",
+    "courses": [
+      {
+        "coursecode": "CE754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE757",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT658",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "07:00",
+          "end": "10:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "08:30",
+          "end": "10:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "07:00",
+          "end": "10:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "07:00",
+          "end": "10:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I183",
+    "name": "Shesh Raj Kafle",
+    "courses": [
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "07:45",
+          "end": "08:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I184",
+    "name": "Shambu Kumar Thakur",
+    "courses": [
+      {
+        "coursecode": "CE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE765",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "12:15",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I186",
+    "name": "Sirish Pandey",
+    "courses": [
+      {
+        "coursecode": "CE765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "12:15",
+          "end": "13:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "12:15"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I189",
+    "name": "Nirajan Devkota",
+    "courses": [
+      {
+        "coursecode": "CE654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 306",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 306",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I190",
+    "name": "Piyush Pradhan",
+    "courses": [
+      {
+        "coursecode": "ENCE 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 205",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 303",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I191",
+    "name": "Amit Chapagain",
+    "courses": [
+      {
+        "coursecode": "ENCT 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        },
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I192",
+    "name": "Aayush Pudasaini",
+    "courses": [
+      {
+        "coursecode": "ENME 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE654",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE651",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "17:00"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "17:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "17:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I193",
+    "name": "Akhalesh Yadav",
+    "courses": [
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        },
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "11:30",
+          "end": "12:15"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I194",
+    "name": "Ankit Shrestha",
+    "courses": [
+      {
+        "coursecode": "IE671",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE671",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        },
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "12:15",
+          "end": "13:45"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I195",
+    "name": "Barun Kumar Jha",
+    "courses": [
+      {
+        "coursecode": "ENIE 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "11:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I199",
+    "name": "Utsab Acharya",
+    "courses": [
+      {
+        "coursecode": "IE651",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "15:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I201",
+    "name": "Dr. Govinda Raj Pokharel",
+    "courses": [
+      {
+        "coursecode": "IE653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I202",
+    "name": "Ram Shrestha(PhD)",
+    "courses": [
+      {
+        "coursecode": "AR651",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "12:15",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I203",
+    "name": "Kamal Ranapal",
+    "courses": [
+      {
+        "coursecode": "ENAR 304",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "11:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I204",
+    "name": "Prasiddhi Hamal",
+    "courses": [
+      {
+        "coursecode": "AR651",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "12:15",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I205",
+    "name": "Chakra Bhandari",
+    "courses": [
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I206",
+    "name": "Suman Acharya",
+    "courses": [
+      {
+        "coursecode": "ENIE 305",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 309",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 206",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I207",
+    "name": "Prabin Basnet",
+    "courses": [
+      {
+        "coursecode": "AR765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AR765",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "07:00",
+          "end": "10:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I210",
+    "name": "Sushant Raj Giri",
+    "courses": [
+      {
+        "coursecode": "ENIE 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE671",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE671",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "IE751",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I211",
+    "name": "Binod Sapkota",
+    "courses": [
+      {
+        "coursecode": "CT 80X XX",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT 80X XX",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT754",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 304",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 765 07",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT655",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I212",
+    "name": "Dr. Khem Gyanwali",
+    "courses": [
+      {
+        "coursecode": "AM765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I213",
+    "name": "Arun Bikram Thapa",
+    "courses": [
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME785",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I214",
+    "name": "Dr. Ram Prasad Neupane",
+    "courses": [
+      {
+        "coursecode": "CE652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE753",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I216",
+    "name": "Anup Shrestha",
+    "courses": [
+      {
+        "coursecode": "CT656",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I218",
+    "name": "Bibek Khanal",
+    "courses": [
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I219",
+    "name": "Dr. Sanjeema Bajracharya",
+    "courses": [
+      {
+        "coursecode": "CE651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 301",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I221",
+    "name": "Karan Dev Bhatta",
+    "courses": [
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:45",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I222",
+    "name": "Pramshu Ghimire",
+    "courses": [
+      {
+        "coursecode": "CE653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 304",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I223",
+    "name": "Dr. Manoj Kumar Thapa",
+    "courses": [
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 102",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I225",
+    "name": "Dr. Shree Hari Thapa",
+    "courses": [
+      {
+        "coursecode": "AR751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 305",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE659",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AR753",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE761",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME760",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I226",
+    "name": "Dipendra Kafle",
+    "courses": [
+      {
+        "coursecode": "ENAM 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 308",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME751",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME785",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I229",
+    "name": "Rajendra Joshi",
+    "courses": [
+      {
+        "coursecode": "CE657",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "12:15",
+          "end": "13:45"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I230",
+    "name": "Sabin Acharya",
+    "courses": [
+      {
+        "coursecode": "CT655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT753",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT754",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 305",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX656",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX756",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 765 07",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 785 03",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT751",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT654",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX654",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 305",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT656",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT657",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT658",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT 765 07",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT753",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 80X XX",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "EX756",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I231",
+    "name": "Rabina Nagaju",
+    "courses": [
+      {
+        "coursecode": "CE765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 103",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 205",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 301",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I232",
+    "name": "Richa Dhungana",
+    "courses": [
+      {
+        "coursecode": "CE658",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 104",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 104",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 301",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I233",
+    "name": "Prajwal Singh Thapa",
+    "courses": [
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Wednesday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I235",
+    "name": "Girban Adhikari",
+    "courses": [
+      {
+        "coursecode": "CT653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT656",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I236",
+    "name": "Punnyashwori Shakya",
+    "courses": [
+      {
+        "coursecode": "SH653",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I237",
+    "name": "Gopal Karn",
+    "courses": [
+      {
+        "coursecode": "EX756",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX756",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "08:30",
+          "end": "10:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "07:00",
+          "end": "09:15"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "08:30",
+          "end": "10:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I239",
+    "name": "Milan Neupane",
+    "courses": [
+      {
+        "coursecode": "AM654",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "13:00"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I240",
+    "name": "Kiran Bagale",
+    "courses": [
+      {
+        "coursecode": "ENCT 305",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 305",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 325-344",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "11:30",
+          "end": "14:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I241",
+    "name": "Arati Kumari Mainali",
+    "courses": [
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "SH651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH655",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "13:45"
+        }
+      ],
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "14:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "14:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "14:30"
+        }
+      ],
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I242",
+    "name": "Anil Thapa",
+    "courses": [
+      {
+        "coursecode": "ENEX 202",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I244",
+    "name": "Chitran Pokharel",
+    "courses": [
+      {
+        "coursecode": "CT 785 03",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT 785 03",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "07:00",
+          "end": "10:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "07:00",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I246",
+    "name": "Saroj Gautam",
+    "courses": [
+      {
+        "coursecode": "ENCT 304",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I247",
+    "name": "Sharmila Bista",
+    "courses": [
+      {
+        "coursecode": "ENCT 203",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "14:00",
+          "end": "16:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "14:00",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I248",
+    "name": "Sanam Dangol",
+    "courses": [
+      {
+        "coursecode": "ENCT 325-344",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 325-344",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I249",
+    "name": "Binod Wosti",
+    "courses": [
+      {
+        "coursecode": "CT753",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT753",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "07:00",
+          "end": "08:30"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "08:30",
+          "end": "13:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I250",
+    "name": "Abhinesh Khatri",
+    "courses": [
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:45",
+          "end": "16:00"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I253",
+    "name": "Uday Raj Kafle",
+    "courses": [
+      {
+        "coursecode": "ME785",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I254",
+    "name": "Narendra Man Mukhiya",
+    "courses": [
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH754",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ],
+      "Thursday": [
+        {
+          "start": "10:00",
+          "end": "13:00"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:00",
+          "end": "11:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I255",
+    "name": "Shiksha Karki",
+    "courses": [
+      {
+        "coursecode": "SH651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "SH655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "SH655",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "14:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I256",
+    "name": "Sanjog Silwal",
+    "courses": [
+      {
+        "coursecode": "AM765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 205",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I257",
+    "name": "Sitanshu Kumar Yadav",
+    "courses": [
+      {
+        "coursecode": "ENCT 101",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "10:00",
+          "end": "12:15"
+        }
+      ],
+      "Tuesday": [
+        {
+          "start": "10:45",
+          "end": "13:00"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "13:45",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I258",
+    "name": "Gokul Joshi",
+    "courses": [
+      {
+        "coursecode": "ENCE 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Thursday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I260",
+    "name": "Shubham Adhikari",
+    "courses": [
+      {
+        "coursecode": "CE656",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Monday": [
+        {
+          "start": "13:00",
+          "end": "16:00"
+        }
+      ],
+      "Sunday": [
+        {
+          "start": "13:00",
+          "end": "14:30"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I261",
+    "name": "Subash Dhakal",
+    "courses": [
+      {
+        "coursecode": "ENCE 201",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {
+      "Friday": [
+        {
+          "start": "10:00",
+          "end": "13:45"
+        }
+      ],
+      "Wednesday": [
+        {
+          "start": "14:30",
+          "end": "16:00"
+        }
+      ]
+    }
+  },
+  {
+    "id": "I262",
+    "name": "Sameer Pandit",
+    "courses": [
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 203",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I263",
+    "name": "Baldev Adhikari",
+    "courses": [
+      {
+        "coursecode": "ENSH 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I264",
+    "name": "Sudan Neupane",
+    "courses": [
+      {
+        "coursecode": "ENCE 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENIE 203",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 103",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 206",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE671",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE751",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I266",
+    "name": "Shambhu Krishna Mastaran",
+    "courses": [
+      {
+        "coursecode": "ENME 106",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "IE652",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I267",
+    "name": "Ganesh Kumal",
+    "courses": [
+      {
+        "coursecode": "ENCT 303",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 201",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I268",
+    "name": "Dr. Raj Kumar Chaulagain",
+    "courses": [
+      {
+        "coursecode": "AM652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 302",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 303",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I269",
+    "name": "Hari Ram Limbu",
+    "courses": [
+      {
+        "coursecode": "ENSH 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENSH 202",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I270",
+    "name": "Debendra Bahadur Raut",
+    "courses": [
+      {
+        "coursecode": "AM785",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAM 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 309",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 309",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME655",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME652",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I272",
+    "name": "Sukriti Suvedi",
+    "courses": [
+      {
+        "coursecode": "CE655",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE659",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE659",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 305",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCE 305",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCE 307",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AR751",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I273",
+    "name": "Shailendra Raj Khanal",
+    "courses": [
+      {
+        "coursecode": "CE754",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE757",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT658",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEE 103",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I274",
+    "name": "Kobid Karkee",
+    "courses": [
+      {
+        "coursecode": "ENCT 201",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEE 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I275",
+    "name": "Lochan Kendra Devkota",
+    "courses": [
+      {
+        "coursecode": "AM653",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM653",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM765",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 304",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENME 308",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENME 308",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ME652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 307",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM651",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "AM651",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAM 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM652",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM654",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "AM785",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAM 302",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I276",
+    "name": "Merina Sthapit",
+    "courses": [
+      {
+        "coursecode": "ENSH 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENSH 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I277",
+    "name": "Umesh Kanta Ghimire",
+    "courses": [
+      {
+        "coursecode": "CT652",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 301",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 204",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEE 204",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENEX 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 201",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 202",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENCT 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 203",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENEX 202",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 301",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 302",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 303",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENCT 304",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I278",
+    "name": "Bimala Tuladhar",
+    "courses": [
+      {
+        "coursecode": "ENAR 101",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ENAR 101",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 102",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "ENAR 103",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I279",
+    "name": "Dr. Indra Narayan Yadav",
+    "courses": [
+      {
+        "coursecode": "CE752",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CE765",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE765",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I280",
+    "name": "Project Supervisor A",
+    "courses": [
+      {
+        "coursecode": "AM755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME755",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I281",
+    "name": "Project Supervisor B",
+    "courses": [
+      {
+        "coursecode": "AM755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CE755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "CT755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "EX755",
+        "coursetype": "Practical"
+      },
+      {
+        "coursecode": "ME755",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I282",
+    "name": "Structure III Instructor",
+    "courses": [
+      {
+        "coursecode": "CE657",
+        "coursetype": "Theory"
+      }
+    ],
+    "availability": {}
+  },
+  {
+    "id": "I283",
+    "name": "Multimedia Systems Instructor",
+    "courses": [
+      {
+        "coursecode": "CT 785 03",
+        "coursetype": "Theory"
+      },
+      {
+        "coursecode": "CT 785 03",
+        "coursetype": "Practical"
+      }
+    ],
+    "availability": {}
+  }
+]

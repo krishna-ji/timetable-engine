@@ -1,0 +1,267 @@
+[project]
+name = "schedule-engine"
+version = "2.0.0"
+description = "University course scheduling engine using adaptive NSGA-II genetic algorithm with constraint-based optimization"
+authors = [
+    { name = "Krishna Acharya" },
+    { name = "Dinanath Padhya" },
+    { name = "Bipul Dahal" },
+]
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+keywords = [
+    "scheduling",
+    "genetic-algorithm",
+    "nsga-ii",
+    "optimization",
+    "timetabling",
+]
+
+dependencies = [
+    # Core
+    "pydantic>=2.10.3",
+    "pyyaml>=6.0.2",
+    "rich>=13.9.4",
+    "tqdm>=4.67.1",
+    # Scientific computing
+    "numpy>=2.1,<2.3",
+    "scipy>=1.13",
+    "matplotlib>=3.9",
+    "seaborn>=0.13.2",
+    "pandas>=2.2.3",
+    # System utilities
+    "psutil>=6.1.1",
+    "plotext>=5.3.2",
+    # GA engine
+    "pymoo>=0.6.1.3",
+    "numba>=0.61.0",
+    # HTTP / gRPC servers
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "grpcio>=1.68",
+    "protobuf>=5.29",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.3.4",
+    "pytest-cov==6.0.0",
+    "ruff==0.8.4",
+    "mypy==1.13.0",
+    "types-pyyaml==6.0.12.20240917",
+]
+
+[tool.uv]
+index-strategy = "unsafe-best-match"
+
+[tool.pytest.ini_options]
+pythonpath = ["tests"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+exclude = [
+    ".venv",
+    "__pycache__",
+    "output",
+    "notebooks",
+    "logs",
+    ".pytest_cache",
+    "data",
+    "data/**",
+]
+
+[tool.ruff.lint]
+# Comprehensive rule sets for thorough linting
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort (import sorting)
+    "N",    # pep8-naming
+    "UP",   # pyupgrade (modernize syntax)
+    "B",    # flake8-bugbear (common bugs)
+    "C4",   # flake8-comprehensions
+    "SIM",  # flake8-simplify
+    "RUF",  # Ruff-specific rules
+    "PTH",  # flake8-use-pathlib
+    "PERF", # Perflint (performance anti-patterns)
+    "PL",   # Pylint subset (errors, warnings, refactor)
+    "TC",   # flake8-type-checking (move imports behind TYPE_CHECKING)
+    "T20",  # flake8-print (catch stray prints)
+    "PIE",  # flake8-pie (misc. lints)
+    "RET",  # flake8-return (return statement issues)
+    "ICN",  # flake8-import-conventions
+    "A",    # flake8-builtins (shadowing builtins)
+    "FLY",  # flynt (f-string conversion)
+    "LOG",  # flake8-logging
+]
+
+ignore = [
+    "E402",    # Module level import not at top of file (console init)
+    "E501",    # Line too long (handled by Black)
+    "SIM108",  # Use ternary operator (sometimes less readable)
+    "PLR0913", # Too many arguments to function call
+    "PLR2004", # Magic value in comparison
+    "PLR0911", # Too many return statements
+    "PLR0912", # Too many branches
+    "PLR0915", # Too many statements
+    "PLC0415", # Import not at top-level — lazy imports used intentionally
+    "T201",    # print() found — allow for CLI/debug scripts
+    "RET504",  # Unnecessary assignment before return
+    "PLW2901", # Overwriting loop variable
+    "N806",    # Uppercase variable in function — numpy convention (X, G, F, N, E)
+    "N803",    # Uppercase argument name — numpy convention (X, G, F)
+    "N802",    # Uppercase function name — used by pymoo overrides (_do)
+    "N817",    # CamelCase imported as acronym
+    "PLW0603", # global statement — used in audit/CLI scripts
+    "RUF002",  # Ambiguous unicode in docstring (en-dash)
+    "RUF003",  # Ambiguous unicode in comment (multiplication sign)
+    "RUF001",  # Ambiguous unicode in string
+    "A005",    # Module shadows stdlib — src/io is intentional
+    "PTH123",  # builtin open() — acceptable in scripts & data loading
+    "PTH120",  # os.path.dirname — acceptable
+    "PTH119",  # os.path.basename — acceptable
+    "PTH100",  # os.path.abspath — acceptable
+]
+
+# Allow autofix for all enabled rules
+fixable = ["ALL"]
+unfixable = []
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]
+"tests/**/*.py" = ["S101"]
+"runs/*.py" = [
+    "N806",
+    "F821",
+    "F401",
+    "PLW0603",
+    "T201",
+    "PTH123",
+    "B007",
+    "PERF401",
+    "SIM102",
+]
+"solve.py" = ["T201", "PTH123"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["src"]
+section-order = [
+    "future",
+    "standard-library",
+    "third-party",
+    "first-party",
+    "local-folder",
+]
+
+[tool.mypy]
+python_version = "3.12"
+
+# --- Strictness ---
+warn_return_any = true
+warn_unused_configs = true
+warn_unused_ignores = true
+warn_redundant_casts = true
+warn_unreachable = true
+no_implicit_optional = true
+strict_equality = true
+check_untyped_defs = true
+
+# Start with typed-defs OFF globally, tighten per-module below
+disallow_untyped_defs = false
+disallow_incomplete_defs = false
+
+# Allow gradual adoption — flip to false as you add stubs
+ignore_missing_imports = true
+
+# --- Scope ---
+files = ["src", "tests", "configs", "runs", "scripts", "solve.py"]
+explicit_package_bases = true
+exclude = ["output/", "logs/", "notebooks/"]
+
+# Per-module type checking rules
+[[tool.mypy.overrides]]
+module = ["runs.*", "configs.*", "scripts.*"]
+# Relaxed rules for script directories
+ignore_missing_imports = true
+disable_error_code = [
+    "var-annotated",
+    "attr-defined",
+    "arg-type",
+    "call-arg",
+    "name-defined",
+    "assignment",
+    "no-any-return",
+    "valid-type",
+    "unreachable",
+    "union-attr",
+    "return-value",
+]
+
+[[tool.mypy.overrides]]
+module = ["tests.*"]
+ignore_missing_imports = true
+disable_error_code = [
+    "attr-defined",
+    "arg-type",
+    "call-arg",
+    "var-annotated",
+    "comparison-overlap",
+    "list-item",
+    "misc",
+    "union-attr",
+]
+
+# Strict typing for core library modules
+[[tool.mypy.overrides]]
+module = [
+    "src.utils.*",
+    "src.config.*",
+    "src.constants",
+    "src.exceptions",
+    "src.domain.*",
+    "src.io.*",
+    "src.constraints.*",
+    "src.metrics.*",
+]
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+
+# RL subsystem — dynamic SB3 / gymnasium types
+[[tool.mypy.overrides]]
+module = [
+
+    "src.rl.training.callbacks",
+    "src.rl.training.trainer",
+    "src.rl.deployment.inference",
+    "src.rl.hybrid.hybrid_controller",
+]
+disable_error_code = [
+    "attr-defined",
+    "call-arg",
+    "unreachable",
+    "unused-ignore",
+]
+
+# isinstance narrowing mypy can't handle
+[[tool.mypy.overrides]]
+module = ["src.io.validator", "src.io.export.violation_reporter"]
+disable_error_code = ["unreachable", "misc", "comparison-overlap"]
+
+# GA modules with exhaustive match
+[[tool.mypy.overrides]]
+module = [
+    "src.ga.metrics.violation_recorder",
+    "src.ga.repair.selective_heuristic",
+    "src.ga.repair.break_repair",
+    "src.io.feasibility",
+]
+disable_error_code = ["unreachable"]
+
+# Experiment runner — dynamic pkl data access
+[[tool.mypy.overrides]]
+module = ["src.experiments.*"]
+disable_error_code = ["index", "attr-defined", "union-attr", "assignment"]

@@ -1,0 +1,11 @@
+# Ignore output artifacts
+output/
+results/
+*.egg-info/
+__pycache__/
+.venv/
+.pytest_cache/
+.coverage
+.mypy_cache/
+.ruff_cache/
+*.pyc
