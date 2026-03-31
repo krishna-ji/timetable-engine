@@ -71,6 +71,22 @@ def main():
         action="store_true",
         help="Generate schedule PDFs even when no feasible solution exists",
     )
+    parser.add_argument(
+        "--optimize-sc",
+        action="store_true",
+        help="Run CP-SAT soft constraint optimization after GA",
+    )
+    parser.add_argument(
+        "--sc-time-limit",
+        type=float,
+        default=60.0,
+        help="Time budget for SC optimizer in seconds (default: 60)",
+    )
+    parser.add_argument(
+        "--sc-target",
+        default=None,
+        help="Comma-separated SC names to target (default: all)",
+    )
     args = parser.parse_args()
 
     from src.experiments import AdaptiveExperiment
@@ -84,6 +100,82 @@ def main():
         verbose=True,
     )
     exp.run()
+
+    # ── SC Optimization Phase ──
+    if args.optimize_sc:
+        from src.domain.gene import set_time_system
+        from src.io.data_store import DataStore
+        from src.pipeline.cpsat_sc_optimizer import (
+            SCOptimizer,
+            SCOptimizerConfig,
+            load_schedule_json,
+        )
+
+        # Find latest schedule.json from GA output
+        output_dirs = sorted(Path("output/ga_adaptive").glob("*/schedule.json"))
+        if not output_dirs:
+            print("Warning: No schedule.json found — skipping SC optimization.")
+        else:
+            schedule_path = Path(output_dirs[-1])
+            output_dir = schedule_path.parent
+
+            store = DataStore.from_json("data_fixed")
+            set_time_system(store.qts)
+
+            target_scs = None
+            if args.sc_target:
+                target_scs = [s.strip() for s in args.sc_target.split(",")]
+
+            config = SCOptimizerConfig(
+                time_budget_seconds=args.sc_time_limit,
+                target_constraints=target_scs,
+                seed=args.seed,
+            )
+
+            genes = load_schedule_json(schedule_path, store)
+            from src.domain.timetable import Timetable
+
+            context = store.to_context()
+            input_tt = Timetable(genes, context, store.qts)
+
+            optimizer = SCOptimizer(data_store=store)
+            try:
+                opt_result = optimizer.optimize(input_tt, config)
+                report = optimizer._format_report(opt_result, config)
+                SCOptimizer.print_console_report(report)
+
+                # Save optimized schedule alongside original
+                import json
+
+                optimized_path = output_dir / "schedule_optimized.json"
+                qts = store.qts
+                entries = []
+                for gene in opt_result.output_timetable.genes:
+                    decoded = qts.decode_schedule(set(gene.get_quanta_list()))
+                    entries.append(
+                        {
+                            "course_id": gene.course_id,
+                            "course_type": gene.course_type,
+                            "instructor_id": gene.instructor_id,
+                            "group_ids": gene.group_ids,
+                            "room_id": gene.room_id,
+                            "start_quanta": gene.start_quanta,
+                            "num_quanta": gene.num_quanta,
+                            "co_instructor_ids": gene.co_instructor_ids or [],
+                            "time": decoded,
+                        }
+                    )
+                optimized_path.write_text(
+                    json.dumps(entries, indent=2, ensure_ascii=False)
+                )
+                print(f"Optimized schedule saved to {optimized_path}")
+
+                # Save report
+                report_path = output_dir / "sc_improvement_report.json"
+                SCOptimizer.save_json_report(report, report_path)
+                print(f"SC report saved to {report_path}")
+            except ValueError as e:
+                print(f"SC optimization failed: {e}")
 
 
 if __name__ == "__main__":
