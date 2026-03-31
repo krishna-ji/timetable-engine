@@ -27,6 +27,9 @@ logs/
 output/
 results/
 
+# Scratch / working files
+scratch/
+
 # Artifacts
 models/
 *.pkl

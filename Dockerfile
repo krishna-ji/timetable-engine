@@ -14,6 +14,8 @@ COPY data_fixed/ data_fixed/
 COPY runs/ runs/
 COPY proto/ proto/
 COPY solve.py ./
+COPY cpsat_phase1.py ./
+COPY cpsat_solver.py ./
 COPY http_server.py ./
 COPY grpc_server.py ./
 COPY entrypoint.sh ./

@@ -92,6 +92,7 @@ class ScheduleRequest(BaseModel):
     generations: int = 300
     population_size: int = 100
     seed: int = 42
+    solver: str = "cpsat"  # "cpsat" (default) or "ga"
 
 
 class ScheduleResponse(BaseModel):
@@ -103,6 +104,10 @@ class ScheduleResponse(BaseModel):
     elapsed_seconds: float = 0
     fitness_history: list[dict[str, Any]] = Field(default_factory=list)
     error: str | None = None
+    # CP-SAT specific fields
+    violations: dict[str, int] | None = None
+    rooms_assigned: int | None = None
+    rooms_failed: int | None = None
 
 
 class EngineStatusResponse(BaseModel):
@@ -225,20 +230,65 @@ async def run_schedule(req: ScheduleRequest):
     """Run the scheduling algorithm. Returns when complete."""
     job_id = req.job_id
     logger.info(
-        "Schedule request job_id=%s gens=%d pop=%d seed=%d courses=%d groups=%d instructors=%d rooms=%d",
-        job_id, req.generations, req.population_size, req.seed,
-        len(req.courses), len(req.groups), len(req.instructors), len(req.rooms),
+        "Schedule request job_id=%s solver=%s courses=%d groups=%d instructors=%d rooms=%d",
+        job_id, req.solver, len(req.courses), len(req.groups),
+        len(req.instructors), len(req.rooms),
     )
 
     _active_jobs[job_id] = {"status": "running", "started": time.time()}
 
     try:
-        work_dir = Path(tempfile.mkdtemp(prefix="sch_run_"))
-        data_dir = work_dir / "data"
-        data_dir.mkdir()
-        output_dir = work_dir / "output"
-        output_dir.mkdir()
+        if req.solver == "cpsat":
+            return await _run_cpsat(req, job_id)
+        else:
+            return await _run_ga(req, job_id)
+    except Exception as exc:
+        logger.exception("Schedule run failed job_id=%s", job_id)
+        return ScheduleResponse(
+            job_id=job_id,
+            status="failed",
+            error=str(exc),
+            elapsed_seconds=round(time.time() - _active_jobs.get(job_id, {}).get("started", time.time()), 2),
+        )
+    finally:
+        _active_jobs.pop(job_id, None)
 
+
+async def _run_cpsat(req: ScheduleRequest, job_id: str) -> ScheduleResponse:
+    """Run the CP-SAT 3-phase pipeline."""
+    from cpsat_solver import solve_timetable_from_json, SolveConfig
+
+    cfg = SolveConfig(seeds=max(1, req.seed))
+    result = solve_timetable_from_json(
+        courses=req.courses,
+        groups=req.groups,
+        instructors=req.instructors,
+        rooms=req.rooms,
+        config=cfg,
+    )
+
+    return ScheduleResponse(
+        job_id=job_id,
+        status="completed" if result.success else "failed",
+        schedule=result.schedule,
+        best_hard=float(result.violations),
+        elapsed_seconds=result.elapsed_seconds,
+        error=result.error,
+        violations=result.violation_details,
+        rooms_assigned=result.rooms_assigned,
+        rooms_failed=result.rooms_failed,
+    )
+
+
+async def _run_ga(req: ScheduleRequest, job_id: str) -> ScheduleResponse:
+    """Run the legacy GA solver."""
+    work_dir = Path(tempfile.mkdtemp(prefix="sch_run_"))
+    data_dir = work_dir / "data"
+    data_dir.mkdir()
+    output_dir = work_dir / "output"
+    output_dir.mkdir()
+
+    try:
         (data_dir / "Course.json").write_text(json.dumps(req.courses))
         (data_dir / "Groups.json").write_text(json.dumps(req.groups))
         (data_dir / "Instructors.json").write_text(json.dumps(req.instructors))
@@ -287,8 +337,6 @@ async def run_schedule(req: ScheduleRequest):
         # Build decoded schedule with time information from quantum system
         decoded = _decode_schedule_quanta(schedule_data)
 
-        shutil.rmtree(work_dir, ignore_errors=True)
-
         logger.info(
             "Schedule job_id=%s completed in %.1fs hard=%d soft=%.1f entries=%d",
             job_id, elapsed, best_hard, best_soft, len(decoded),
@@ -302,17 +350,8 @@ async def run_schedule(req: ScheduleRequest):
             best_soft=best_soft,
             elapsed_seconds=round(elapsed, 2),
         )
-
-    except Exception as exc:
-        logger.exception("Schedule run failed job_id=%s", job_id)
-        return ScheduleResponse(
-            job_id=job_id,
-            status="failed",
-            error=str(exc),
-            elapsed_seconds=round(time.time() - _active_jobs.get(job_id, {}).get("started", time.time()), 2),
-        )
     finally:
-        _active_jobs.pop(job_id, None)
+        shutil.rmtree(work_dir, ignore_errors=True)
 
 
 # ── Helpers ───────────────────────────────────────────────────────────
