@@ -88,18 +88,62 @@ class Session:
 # ──────────────────────────────────────────────────────────────────
 
 
-def build_sessions(store: DataStore) -> tuple[list[Session], list[str], list[str]]:
+def cross_qualify_practicals(store: DataStore) -> dict[tuple[str, str], set[str]]:
+    """For each practical course, find the theory variant and merge instructor pools.
+
+    Returns dict mapping course_key → additional instructor IDs to add.
+    This fixes the PMI bottleneck: practicals with only 1-2 qualified instructors
+    gain the theory instructors for the same course code.
+    """
+    additions: dict[tuple[str, str], set[str]] = {}
+    # Group courses by course_code
+    code_to_keys: dict[str, dict[str, tuple[str, str]]] = defaultdict(dict)
+    for key, course in store.courses.items():
+        code, ctype = key
+        code_to_keys[code][ctype] = key
+
+    for code, type_map in code_to_keys.items():
+        if "practical" not in type_map or "theory" not in type_map:
+            continue
+        prac_key = type_map["practical"]
+        theory_key = type_map["theory"]
+        prac_course = store.courses[prac_key]
+        theory_course = store.courses[theory_key]
+        prac_insts = set(prac_course.qualified_instructor_ids)
+        theory_insts = set(theory_course.qualified_instructor_ids)
+        new_insts = theory_insts - prac_insts
+        if new_insts:
+            additions[prac_key] = new_insts
+
+    return additions
+
+
+def build_sessions(
+    store: DataStore,
+    *,
+    cross_qualify: bool = False,
+) -> tuple[list[Session], list[str], list[str]]:
     """Generate all scheduling sessions from loaded data.
 
     Each (course, group) pair is split into subsessions based on L/T/P rules:
       - Theory → 2-quanta blocks (with 1-quanta remainder if odd)
       - Practical → single monolithic block
 
+    If cross_qualify=True, theory instructors are added to practical pools
+    for the same course code (fixes PMI bottleneck).
+
     ExactWeeklyHours is guaranteed structurally: the sum of
     subsession durations == course.quanta_per_week for every (course, group).
 
     Returns (sessions, instructor_ids_list, room_ids_list).
     """
+    # Cross-qualification: merge theory → practical instructor pools
+    xq_additions: dict[tuple[str, str], set[str]] = {}
+    if cross_qualify:
+        xq_additions = cross_qualify_practicals(store)
+        if xq_additions:
+            total_new = sum(len(v) for v in xq_additions.values())
+            print(f"  Cross-qualification: {len(xq_additions)} practicals gain {total_new} instructors from theory")
     hierarchy = analyze_group_hierarchy(store.groups)
     pairs = generate_course_group_pairs(
         store.courses, store.groups, hierarchy, silent=True
@@ -122,10 +166,14 @@ def build_sessions(store: DataStore) -> tuple[list[Session], list[str], list[str
             continue
 
         # InstructorMustBeQualified — restrict to qualified instructors only
+        base_ids = set(course.qualified_instructor_ids)
+        # Add cross-qualified theory instructors for practicals
+        if cross_qualify and course_key in xq_additions:
+            base_ids |= xq_additions[course_key]
         q_inst = sorted(
             set(
                 inst_to_idx[iid]
-                for iid in course.qualified_instructor_ids
+                for iid in base_ids
                 if iid in inst_to_idx
             )
         )
@@ -216,6 +264,8 @@ def build_phase1_model(
     relax_fte: bool = False,
     relax_ffc: bool = False,
     relax_pmi: bool = False,
+    no_rooms: bool = False,
+    room_pool_limit: int = 0,
 ) -> tuple[cp_model.CpModel, dict]:
     """Build CP-SAT model with InstructorMustBeAvailable dropped (Phase 1 core).
 
@@ -243,6 +293,11 @@ def build_phase1_model(
         NoInstructorDoubleBooking: NoOverlap(optional instr intervals) per instructor
         NoRoomDoubleBooking:       NoOverlap(optional room intervals) per room
         SpreadAcrossDays:          AllDifferent(day) for sibling sessions
+
+    When no_rooms=True, room modeling behavior depends on room_pool_limit:
+      room_pool_limit=0  → skip ALL room variables (pure Phase A)
+      room_pool_limit=N  → model rooms for pools with ≤ N rooms (hybrid)
+    Remaining large-pool rooms are assigned in Phase B.
 
     Returns (model, vars_dict).
     """
@@ -343,17 +398,32 @@ def build_phase1_model(
     # ================================================================
 
     # Room booleans: room_bool[(mi, ridx)] = "session mi is in room ridx"
+    # When no_rooms + room_pool_limit > 0: use soft overlap penalties instead
+    # When no_rooms + room_pool_limit = 0: skip all room handling
     room_bool: dict[tuple[int, int], cp_model.IntVar] = {}
+    room_modeled_mis: set[int] = set()
+
+    # Precompute pool mapping for all sessions
+    mi_pool: dict[int, tuple[int, ...]] = {}
+    pool_to_mis: dict[tuple[int, ...], list[int]] = defaultdict(list)
     for mi, orig_i in enumerate(model_indices):
         s = sessions[orig_i]
-        r_idxs = list(range(len(room_ids))) if relax_ffc else s.compatible_room_idxs
-        session_room_bools = []
-        for ridx in r_idxs:
-            b = model.new_bool_var(f"room_{mi}_{ridx}")
-            room_bool[(mi, ridx)] = b
-            session_room_bools.append(b)
-        # Each session goes to exactly one room (RoomMustHaveFeatures via domain)
-        model.add_exactly_one(session_room_bools)
+        pk = tuple(sorted(s.compatible_room_idxs))
+        mi_pool[mi] = pk
+        pool_to_mis[pk].append(mi)
+
+    if not no_rooms:
+        # Full monolithic: all sessions get room booleans
+        for mi, orig_i in enumerate(model_indices):
+            s = sessions[orig_i]
+            r_idxs = list(range(len(room_ids))) if relax_ffc else s.compatible_room_idxs
+            session_room_bools = []
+            for ridx in r_idxs:
+                b = model.new_bool_var(f"room_{mi}_{ridx}")
+                room_bool[(mi, ridx)] = b
+                session_room_bools.append(b)
+            model.add_exactly_one(session_room_bools)
+            room_modeled_mis.add(mi)
 
     # Instructor booleans: instr_bool[(mi, iidx)] = "instructor iidx teaches session mi"
     instr_bool: dict[tuple[int, int], cp_model.IntVar] = {}
@@ -379,6 +449,7 @@ def build_phase1_model(
     # ================================================================
 
     # Room optional intervals: active only when session is assigned to that room
+    # Created for all sessions that have room booleans (full mode or small pools)
     room_opt_intervals: dict[tuple[int, int], cp_model.IntervalVar] = {}
     for (mi, ridx), b in room_bool.items():
         orig_i = model_indices[mi]
@@ -431,8 +502,9 @@ def build_phase1_model(
 
     # ── NoRoomDoubleBooking ──
     # Group all OPTIONAL room intervals by room → NoOverlap
+    # Active for sessions with room modeling (full mode or small-pool hybrid)
     sre_count = 0
-    if not relax_sre:
+    if not relax_sre and room_opt_intervals:
         room_to_opts: dict[int, list[cp_model.IntervalVar]] = defaultdict(list)
         for (mi, ridx), opt_iv in room_opt_intervals.items():
             room_to_opts[ridx].append(opt_iv)
@@ -445,6 +517,58 @@ def build_phase1_model(
     # ── InstructorMustBeQualified + RoomMustHaveFeatures ──
     # Already enforced: instructor booleans only exist for qualified instructors,
     # room booleans only exist for compatible rooms.
+
+    # ── Room Capacity Awareness (Phase A) ──
+    # Strategy depends on room_pool_limit:
+    #   0: pool-size-1 NoOverlap only (pure no-rooms mode)
+    #   >0: pool-size-1 NoOverlap + soft overlap penalties for pools 2..limit
+    #       (from schedule_threephase.py — proven to guide solver away from
+    #        room conflicts without making the model infeasible)
+    pool_cum_count = 0
+    penalty_vars: list[tuple[cp_model.IntVar, int]] = []
+    n_penalty_pairs = 0
+    if no_rooms:
+        # Hard constraint: pool-size-1 sessions must not overlap
+        for pool_key, mis in pool_to_mis.items():
+            pool_size = len(pool_key)
+            if pool_size != 1 or len(mis) <= 1:
+                continue
+            model.add_no_overlap([interval_vars[mi] for mi in mis])
+            pool_cum_count += 1
+
+        # Soft penalties: penalize overlapping sessions in small pools (2..limit)
+        # Turns it into an optimization model which is slower but produces better
+        # room-assignable solutions than hard room constraints.
+        if room_pool_limit > 0:
+            for pool_key, mis in pool_to_mis.items():
+                pool_size = len(pool_key)
+                if pool_size < 2 or pool_size > room_pool_limit:
+                    continue
+                if len(mis) <= pool_size:
+                    continue  # No contention possible
+
+                # Weight inversely proportional to pool size
+                weight = 10 * (room_pool_limit + 1 - pool_size)
+                for i in range(len(mis)):
+                    for j in range(i + 1, len(mis)):
+                        mi_a, mi_b = mis[i], mis[j]
+                        b_overlap = model.new_bool_var(f"olap_{mi_a}_{mi_b}")
+                        b_a_before_b = model.new_bool_var(f"ab_{mi_a}_{mi_b}")
+                        b_b_before_a = model.new_bool_var(f"ba_{mi_a}_{mi_b}")
+                        model.add(
+                            end_vars[mi_a] <= start_vars[mi_b]
+                        ).only_enforce_if(b_a_before_b)
+                        model.add(
+                            end_vars[mi_b] <= start_vars[mi_a]
+                        ).only_enforce_if(b_b_before_a)
+                        model.add(b_a_before_b + b_b_before_a + b_overlap >= 1)
+                        model.add(b_a_before_b + b_overlap <= 1)
+                        model.add(b_b_before_a + b_overlap <= 1)
+                        penalty_vars.append((b_overlap, weight))
+                        n_penalty_pairs += 1
+
+            if penalty_vars:
+                model.minimize(sum(w * v for v, w in penalty_vars))
 
     # ── InstructorMustBeAvailable — INTENTIONALLY DROPPED (Phase 1) ──
 
@@ -486,16 +610,30 @@ def build_phase1_model(
     n_opt_intervals = len(room_opt_intervals) + len(instr_opt_intervals)
     print(f"\n  Variable counts:")
     print(f"    Mandatory intervals: {n_modeled}")
-    print(f"    Room booleans:       {n_room_bools}")
+    if no_rooms and room_pool_limit > 0:
+        print(f"    Room booleans:       {n_room_bools} (pools ≤ {room_pool_limit}: {len(room_modeled_mis)} sessions)")
+    elif no_rooms:
+        print(f"    Room booleans:       {n_room_bools} (SKIPPED — Phase A)")
+    else:
+        print(f"    Room booleans:       {n_room_bools}")
     print(f"    Instructor booleans: {n_instr_bools}")
     print(f"    Optional intervals:  {n_opt_intervals}")
 
     print(f"\n  Constraints applied:")
     print(f"    NoStudentDoubleBooking:    {cte_count} groups")
     print(f"    NoInstructorDoubleBooking: {fte_count} instructors")
-    print(f"    NoRoomDoubleBooking:       {sre_count} rooms")
+    if no_rooms and room_pool_limit == 0:
+        print(f"    NoRoomDoubleBooking:       SKIPPED (Phase A — rooms deferred to Phase B)")
+    elif no_rooms and room_pool_limit > 0:
+        print(f"    NoRoomDoubleBooking:       {sre_count} rooms (pools ≤ {room_pool_limit})")
+    else:
+        print(f"    NoRoomDoubleBooking:       {sre_count} rooms")
+    if no_rooms and pool_cum_count:
+        print(f"    RoomPoolCapacity:          {pool_cum_count} cumulative constraints")
+    if no_rooms and n_penalty_pairs:
+        print(f"    RoomPoolPenalties:         {n_penalty_pairs} overlap pairs across pools ≤ {room_pool_limit}")
     print(f"    InstructorMustBeQualified: via boolean domain")
-    print(f"    RoomMustHaveFeatures:      via boolean domain")
+    print(f"    RoomMustHaveFeatures:      {'deferred to Phase B' if no_rooms else 'via boolean domain'}")
     print(f"    InstructorMustBeAvailable: DROPPED (Phase 1)")
     print(f"    ExactWeeklyHours:          structural")
     print(f"    SpreadAcrossDays:          {ictd_count} sibling groups")
@@ -511,6 +649,8 @@ def build_phase1_model(
         "model_indices": model_indices,
         "impossible_sessions": impossible_sessions,
         "day_names": day_names,
+        "room_modeled_mis": room_modeled_mis,
+        "pool_to_mis": dict(pool_to_mis),
     }
     return model, vars_dict
 
@@ -624,15 +764,19 @@ def solve_and_report(
     vars_dict: dict,
     time_limit: int = 120,
     export_path: str | None = None,
-) -> bool | None:
+    random_seed: int | None = None,
+) -> tuple[bool | None, cp_model.CpSolver | None]:
     """Solve the model and print results.
 
-    Returns True (feasible), False (infeasible), or None (timeout/unknown).
+    Returns (success, solver) where success is True/False/None and solver
+    is the CpSolver with solution values (if feasible).
     """
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit
     solver.parameters.num_workers = 8
     solver.parameters.log_search_progress = True
+    if random_seed is not None:
+        solver.parameters.random_seed = random_seed
 
     n_sessions = len(vars_dict["start"])
     print("\n" + "=" * 72)
@@ -721,7 +865,7 @@ def solve_and_report(
                 solver, sessions, store, instructor_ids, room_ids, vars_dict, export_path
             )
 
-        return True
+        return True, solver
 
     elif status == cp_model.INFEASIBLE:
         print("\n  NO FEASIBLE SCHEDULE EXISTS with Phase 1 constraints!\n")
@@ -736,12 +880,12 @@ def solve_and_report(
         print("    python cpsat_phase1.py --relax-ictd")
         print("    python cpsat_phase1.py --relax-sre")
         print("    python cpsat_phase1.py --relax-ictd --relax-sre")
-        return False
+        return False, None
 
     else:
         print("\n  Could not determine feasibility within time limit.")
         print(f"  Try: python cpsat_phase1.py --time-limit {time_limit * 3}")
-        return None
+        return None, None
 
 
 def _export_solution(
@@ -810,8 +954,586 @@ def _export_solution(
 
 
 # ──────────────────────────────────────────────────────────────────
+# Phase B: Greedy Room Assignment with Stealing (post Phase A)
+# ──────────────────────────────────────────────────────────────────
+
+
+def add_warm_start_hints(
+    model: cp_model.CpModel,
+    vars_dict: dict,
+    phase_a_solver: cp_model.CpSolver,
+    phase_a_vars: dict,
+    assignments: list[dict] | None = None,
+) -> int:
+    """Add solution hints from a solved Phase A model to a hybrid model.
+
+    Hints time + instructor variables from Phase A, and room booleans
+    from greedy assignments (if available). Returns number of hints added.
+    """
+    n_hints = 0
+    model_indices = vars_dict["model_indices"]
+
+    # Hint time variables (start, end, day)
+    for mi in range(len(model_indices)):
+        start_val = phase_a_solver.value(phase_a_vars["start"][mi])
+        model.AddHint(vars_dict["start"][mi], start_val)
+        model.AddHint(vars_dict["end"][mi], start_val + phase_a_solver.value(phase_a_vars["end"][mi]) - phase_a_solver.value(phase_a_vars["start"][mi]))
+        model.AddHint(vars_dict["day"][mi], phase_a_solver.value(phase_a_vars["day"][mi]))
+        n_hints += 3
+
+    # Hint instructor booleans
+    for (mi, iidx), var in vars_dict["instr_bool"].items():
+        if (mi, iidx) in phase_a_vars["instr_bool"]:
+            val = phase_a_solver.value(phase_a_vars["instr_bool"][(mi, iidx)])
+            model.AddHint(var, val)
+            n_hints += 1
+
+    # Hint room booleans from greedy assignments
+    if assignments and vars_dict["room_bool"]:
+        for (mi, ridx), var in vars_dict["room_bool"].items():
+            a = assignments[mi]
+            model.AddHint(var, 1 if a.get("room") == ridx else 0)
+            n_hints += 1
+
+    return n_hints
+
+
+def extract_assignments(
+    solver: cp_model.CpSolver,
+    sessions: list[Session],
+    instructor_ids: list[str],
+    vars_dict: dict,
+) -> list[dict]:
+    """Extract time+instructor assignments from a solved Phase A model."""
+    model_indices = vars_dict["model_indices"]
+    instr_bool = vars_dict["instr_bool"]
+    room_bool = vars_dict["room_bool"]
+    room_modeled_mis = vars_dict.get("room_modeled_mis", set())
+
+    assignments: list[dict] = []
+    for mi, orig_i in enumerate(model_indices):
+        s = sessions[orig_i]
+        start_q = solver.value(vars_dict["start"][mi])
+
+        assigned_instructors = []
+        for iidx in s.qualified_instructor_idxs:
+            if solver.value(instr_bool[(mi, iidx)]):
+                assigned_instructors.append(instructor_ids[iidx])
+
+        phase_a_room = None
+        if mi in room_modeled_mis:
+            for ridx in s.compatible_room_idxs:
+                if (mi, ridx) in room_bool and solver.value(room_bool[(mi, ridx)]):
+                    phase_a_room = ridx
+                    break
+
+        assignments.append({
+            "mi": mi,
+            "orig_i": orig_i,
+            "start": start_q,
+            "duration": s.duration,
+            "end": start_q + s.duration,
+            "instructors": assigned_instructors,
+            "compatible_rooms": list(s.compatible_room_idxs),
+            "phase_a_room": phase_a_room,
+            "room": phase_a_room if phase_a_room is not None else -1,
+        })
+
+    return assignments
+
+
+def phase_b_room_assignment(
+    assignments: list[dict],
+    sessions: list[Session],
+    store: DataStore,
+    room_ids: list[str],
+) -> tuple[int, list[tuple[int, int]]]:
+    """Phase B: Assign rooms using greedy + room-stealing (depth-2 chains).
+
+    Strategy (from schedule_threephase.py):
+    1. Sort by pool size ascending (hardest-to-assign first)
+    2. Try direct assignment to a free compatible room
+    3. Try stealing: move a blocker to an alternative room
+    4. Try chain stealing (depth 2): move blocker's blocker
+
+    Returns (n_failed, conflict_pairs).
+    """
+    print(f"\n{'=' * 72}")
+    print("  PHASE B: Greedy Room Assignment with Stealing")
+    print(f"{'=' * 72}")
+
+    n = len(assignments)
+
+    # Track room → list of (start, end, ai) assignments
+    room_schedule: dict[int, list[tuple[int, int, int]]] = defaultdict(list)
+
+    # Pre-populate rooms assigned in Phase A
+    for ai, a in enumerate(assignments):
+        if a["room"] >= 0:
+            room_schedule[a["room"]].append((a["start"], a["end"], ai))
+
+    def is_room_free(ridx: int, start: int, end: int, exclude_ai: int = -1) -> bool:
+        for (rs, re, ai2) in room_schedule[ridx]:
+            if ai2 == exclude_ai:
+                continue
+            if start < re and rs < end:
+                return False
+        return True
+
+    def assign_room(ai: int, ridx: int) -> None:
+        a = assignments[ai]
+        a["room"] = ridx
+        room_schedule[ridx].append((a["start"], a["end"], ai))
+
+    def unassign_room(ai: int) -> None:
+        a = assignments[ai]
+        ridx = a["room"]
+        room_schedule[ridx] = [(rs, re, ai2) for (rs, re, ai2) in room_schedule[ridx] if ai2 != ai]
+        a["room"] = -1
+
+    # Sort: pool size ascending, then start time (hardest first)
+    needs_room = [ai for ai in range(n) if assignments[ai]["room"] < 0]
+    order = sorted(needs_room, key=lambda ai: (
+        len(assignments[ai]["compatible_rooms"]),
+        assignments[ai]["start"],
+    ))
+
+    n_steals = 0
+    failed: list[int] = []
+
+    for ai in order:
+        a = assignments[ai]
+        start, end = a["start"], a["end"]
+
+        # 1. Direct assignment
+        assigned = False
+        for ridx in sorted(a["compatible_rooms"]):
+            if is_room_free(ridx, start, end):
+                assign_room(ai, ridx)
+                assigned = True
+                break
+        if assigned:
+            continue
+
+        # 2. Steal: move a blocker to a different room
+        stolen = False
+        for ridx in sorted(a["compatible_rooms"]):
+            blockers = [(rs, re, ai2) for (rs, re, ai2) in room_schedule[ridx]
+                        if start < re and rs < end]
+            for (_, _, ai_blocker) in blockers:
+                b_rooms = assignments[ai_blocker]["compatible_rooms"]
+                b_start = assignments[ai_blocker]["start"]
+                b_end = assignments[ai_blocker]["end"]
+                for alt_ridx in sorted(b_rooms):
+                    if alt_ridx == ridx:
+                        continue
+                    if is_room_free(alt_ridx, b_start, b_end):
+                        unassign_room(ai_blocker)
+                        assign_room(ai_blocker, alt_ridx)
+                        # Check room is actually free now (may have other blockers)
+                        if is_room_free(ridx, start, end):
+                            assign_room(ai, ridx)
+                            stolen = True
+                            n_steals += 1
+                        else:
+                            # Revert — other blockers remain
+                            unassign_room(ai_blocker)
+                            assign_room(ai_blocker, ridx)
+                        break
+                if stolen:
+                    break
+            if stolen:
+                break
+        if stolen:
+            continue
+
+        # 3. Chain steal (depth 2)
+        chain_done = False
+        for ridx in sorted(a["compatible_rooms"]):
+            blockers = [(rs, re, ai2) for (rs, re, ai2) in room_schedule[ridx]
+                        if start < re and rs < end]
+            for (_, _, ai_b1) in blockers:
+                b1_rooms = assignments[ai_b1]["compatible_rooms"]
+                b1_start = assignments[ai_b1]["start"]
+                b1_end = assignments[ai_b1]["end"]
+                for alt_ridx in sorted(b1_rooms):
+                    if alt_ridx == ridx:
+                        continue
+                    blockers2 = [(rs, re, ai3) for (rs, re, ai3) in room_schedule[alt_ridx]
+                                 if b1_start < re and rs < b1_end]
+                    for (_, _, ai_b2) in blockers2:
+                        b2_rooms = assignments[ai_b2]["compatible_rooms"]
+                        b2_start = assignments[ai_b2]["start"]
+                        b2_end = assignments[ai_b2]["end"]
+                        for alt2_ridx in sorted(b2_rooms):
+                            if alt2_ridx == alt_ridx:
+                                continue
+                            if is_room_free(alt2_ridx, b2_start, b2_end):
+                                unassign_room(ai_b2)
+                                assign_room(ai_b2, alt2_ridx)
+                                # Check alt_ridx is free for b1 after moving b2 out
+                                if not is_room_free(alt_ridx, b1_start, b1_end):
+                                    # Revert b2
+                                    unassign_room(ai_b2)
+                                    assign_room(ai_b2, alt_ridx)
+                                    break
+                                unassign_room(ai_b1)
+                                assign_room(ai_b1, alt_ridx)
+                                # Check ridx is free for ai after moving b1 out
+                                if is_room_free(ridx, start, end):
+                                    assign_room(ai, ridx)
+                                    chain_done = True
+                                    n_steals += 1
+                                else:
+                                    # Revert full chain
+                                    unassign_room(ai_b1)
+                                    assign_room(ai_b1, ridx)
+                                    unassign_room(ai_b2)
+                                    assign_room(ai_b2, alt_ridx)
+                                break
+                        if chain_done:
+                            break
+                    if chain_done:
+                        break
+                if chain_done:
+                    break
+            if chain_done:
+                break
+
+        if not chain_done:
+            failed.append(ai)
+
+    # Build conflict list
+    conflicts: list[tuple[int, int]] = []
+    if failed:
+        for ai in failed:
+            a = assignments[ai]
+            start, end = a["start"], a["end"]
+            pool = set(a["compatible_rooms"])
+            pool_size = len(pool)
+            for ai2 in range(n):
+                if ai2 == ai or assignments[ai2]["room"] < 0:
+                    continue
+                if assignments[ai2]["room"] not in pool:
+                    continue
+                if assignments[ai2]["start"] < end and start < assignments[ai2]["end"]:
+                    conflicts.append((ai, ai2))
+
+    n_assigned = sum(1 for a in assignments if a["room"] >= 0)
+    if not failed:
+        print(f"\n  ✓ All {n} sessions assigned rooms! ({n_steals} steals)")
+    else:
+        print(f"\n  ✗ {len(failed)}/{n} sessions could not get a room "
+              f"({n_assigned} assigned, {n_steals} steals)")
+        for ai in failed[:10]:
+            a = assignments[ai]
+            s = sessions[a["orig_i"]]
+            print(f"    S{a['orig_i']}: {s.course_id} ({s.course_type}) "
+                  f"start={a['start']} dur={a['duration']} pool={len(a['compatible_rooms'])}")
+        if len(failed) > 10:
+            print(f"    ... and {len(failed) - 10} more")
+
+    return len(failed), failed
+
+
+def phase_c_repair(
+    assignments: list[dict],
+    failed_ais: list[int],
+    sessions: list[Session],
+    store: DataStore,
+    instructor_ids: list[str],
+    room_ids: list[str],
+    time_limit: int = 60,
+) -> int:
+    """Phase C: Re-schedule failed sessions + room-pool neighbors via CP-SAT.
+
+    Frees failed sessions and their neighborhood (same room pool or
+    time-overlapping on same pool). Builds a small CP-SAT model using
+    table constraints (allowed start, instructor, room tuples).
+
+    Returns number of sessions still without rooms (0 = success).
+    Modifies assignments in-place.
+    """
+    print(f"\n{'=' * 72}")
+    print("  PHASE C: CP-SAT Repair for Remaining Failures")
+    print(f"{'=' * 72}")
+
+    qts = store.qts
+    total_quanta = qts.total_quanta
+
+    # Compute valid start quanta per day
+    day_offsets, day_lengths = [], []
+    for day in qts.DAY_NAMES:
+        off = qts.day_quanta_offset.get(day)
+        cnt = qts.day_quanta_count.get(day, 0)
+        if off is not None and cnt > 0:
+            day_offsets.append(off)
+            day_lengths.append(cnt)
+
+    def compute_valid_starts(duration: int) -> list[int]:
+        starts = []
+        for off, length in zip(day_offsets, day_lengths):
+            for s in range(off, off + length - duration + 1):
+                starts.append(s)
+        return starts
+
+    # Expand neighborhood
+    failed_set = set(failed_ais)
+    neighbor_set: set[int] = set()
+
+    # Pools of failed sessions
+    failed_pools: set[frozenset[int]] = set()
+    for ai in failed_ais:
+        s = sessions[assignments[ai]["orig_i"]]
+        failed_pools.add(frozenset(s.compatible_room_idxs))
+
+    # Time-overlapping same-pool neighbors
+    for ai in failed_ais:
+        a = assignments[ai]
+        s = sessions[a["orig_i"]]
+        pool = set(s.compatible_room_idxs)
+        start, end = a["start"], a["end"]
+        for ai2 in range(len(assignments)):
+            if ai2 in failed_set or ai2 in neighbor_set:
+                continue
+            a2 = assignments[ai2]
+            if a2["room"] < 0:
+                continue
+            if a2["room"] not in pool:
+                continue
+            if a2["start"] < end and start < a2["end"]:
+                neighbor_set.add(ai2)
+
+    # Also free ALL sessions in same pool (even non-overlapping)
+    pool_sibling_count = 0
+    for ai2 in range(len(assignments)):
+        if ai2 in failed_set or ai2 in neighbor_set:
+            continue
+        s2 = sessions[assignments[ai2]["orig_i"]]
+        if frozenset(s2.compatible_room_idxs) in failed_pools:
+            neighbor_set.add(ai2)
+            pool_sibling_count += 1
+
+    free_ais = sorted(failed_set | neighbor_set)
+    fixed_ais = [ai for ai in range(len(assignments)) if ai not in set(free_ais)]
+    F = len(free_ais)
+
+    print(f"  {len(failed_ais)} failed + {len(neighbor_set)} neighbors "
+          f"({pool_sibling_count} pool siblings) = {F} free sessions")
+
+    # Build occupancy maps for fixed sessions
+    group_at_q: dict[int, set[str]] = defaultdict(set)
+    inst_at_q: dict[int, set[str]] = defaultdict(set)
+    room_at_q: dict[int, set[int]] = defaultdict(set)
+
+    for ai in fixed_ais:
+        a = assignments[ai]
+        s = sessions[a["orig_i"]]
+        for q in range(a["start"], a["end"]):
+            for gid in s.group_ids:
+                group_at_q[q].add(gid)
+            for iid in a["instructors"]:
+                inst_at_q[q].add(iid)
+            if a["room"] >= 0:
+                room_at_q[q].add(a["room"])
+
+    # Build repair model
+    model = cp_model.CpModel()
+    start_vars: list[cp_model.IntVar] = []
+    inst_vars_r: list[cp_model.IntVar] = []
+    room_vars_r: list[cp_model.IntVar] = []
+
+    # Map instructor IDs to indices for the model
+    iid_to_idx: dict[str, int] = {iid: idx for idx, iid in enumerate(instructor_ids)}
+
+    for fi, ai in enumerate(free_ais):
+        s = sessions[assignments[ai]["orig_i"]]
+        base_starts = compute_valid_starts(s.duration)
+
+        allowed: list[tuple[int, int, int]] = []
+        for st in base_starts:
+            quanta_range = range(st, st + s.duration)
+
+            # Check group availability
+            group_ok = True
+            for q in quanta_range:
+                for gid in s.group_ids:
+                    if gid in group_at_q.get(q, set()):
+                        group_ok = False
+                        break
+                if not group_ok:
+                    break
+            if not group_ok:
+                continue
+
+            for iidx in s.qualified_instructor_idxs:
+                iid = instructor_ids[iidx]
+
+                # Check instructor availability
+                inst_ok = True
+                for q in quanta_range:
+                    if iid in inst_at_q.get(q, set()):
+                        inst_ok = False
+                        break
+                if not inst_ok:
+                    continue
+
+                for ridx in s.compatible_room_idxs:
+                    room_ok = True
+                    for q in quanta_range:
+                        if ridx in room_at_q.get(q, set()):
+                            room_ok = False
+                            break
+                    if room_ok:
+                        allowed.append((st, iidx, ridx))
+
+        if not allowed:
+            print(f"    No feasible (time, inst, room) for S{assignments[ai]['orig_i']} "
+                  f"({s.course_id} dur={s.duration})")
+            # Skip this session entirely — it can't be placed
+            start_vars.append(None)
+            inst_vars_r.append(None)
+            room_vars_r.append(None)
+            continue
+
+        sv = model.new_int_var(0, total_quanta, f"rs_{fi}")
+        iv = model.new_int_var(0, len(instructor_ids), f"ri_{fi}")
+        rv = model.new_int_var(0, len(room_ids), f"rr_{fi}")
+        model.add_allowed_assignments([sv, iv, rv], allowed)
+
+        start_vars.append(sv)
+        inst_vars_r.append(iv)
+        room_vars_r.append(rv)
+
+    # Mutual constraints among free sessions (skip infeasible ones)
+    for i in range(F):
+        if start_vars[i] is None:
+            continue
+        si = sessions[assignments[free_ais[i]]["orig_i"]]
+        for j in range(i + 1, F):
+            if start_vars[j] is None:
+                continue
+            sj = sessions[assignments[free_ais[j]]["orig_i"]]
+
+            # Student group overlap
+            if set(si.group_ids) & set(sj.group_ids):
+                ivi = model.new_fixed_size_interval_var(
+                    start_vars[i], si.duration, f"cte_{i}_{j}_i")
+                ivj = model.new_fixed_size_interval_var(
+                    start_vars[j], sj.duration, f"cte_{i}_{j}_j")
+                model.add_no_overlap([ivi, ivj])
+
+            # Instructor overlap
+            b_same_inst = model.new_bool_var(f"si_{i}_{j}")
+            model.add(inst_vars_r[i] == inst_vars_r[j]).only_enforce_if(b_same_inst)
+            model.add(inst_vars_r[i] != inst_vars_r[j]).only_enforce_if(~b_same_inst)
+            b_order = model.new_bool_var(f"so_{i}_{j}")
+            model.add(
+                start_vars[i] + si.duration <= start_vars[j]
+            ).only_enforce_if(b_same_inst, b_order)
+            model.add(
+                start_vars[j] + sj.duration <= start_vars[i]
+            ).only_enforce_if(b_same_inst, ~b_order)
+
+            # Room overlap
+            b_same_room = model.new_bool_var(f"sr_{i}_{j}")
+            model.add(room_vars_r[i] == room_vars_r[j]).only_enforce_if(b_same_room)
+            model.add(room_vars_r[i] != room_vars_r[j]).only_enforce_if(~b_same_room)
+            b_order2 = model.new_bool_var(f"sro_{i}_{j}")
+            model.add(
+                start_vars[i] + si.duration <= start_vars[j]
+            ).only_enforce_if(b_same_room, b_order2)
+            model.add(
+                start_vars[j] + sj.duration <= start_vars[i]
+            ).only_enforce_if(b_same_room, ~b_order2)
+
+    proto = model.proto
+    print(f"  Repair model: {F} free sessions, "
+          f"{len(proto.variables)} vars, {len(proto.constraints)} constraints")
+
+    solver = cp_model.CpSolver()
+    solver.parameters.max_time_in_seconds = time_limit
+    solver.parameters.num_workers = 8
+
+    t0 = time.time()
+    status = solver.Solve(model)
+    elapsed = time.time() - t0
+
+    STATUS = {
+        cp_model.OPTIMAL: "OPTIMAL",
+        cp_model.FEASIBLE: "FEASIBLE",
+        cp_model.INFEASIBLE: "INFEASIBLE",
+        cp_model.UNKNOWN: "UNKNOWN",
+    }
+    print(f"  Repair: {STATUS.get(status, '?')} in {elapsed:.2f}s")
+
+    if status not in (cp_model.OPTIMAL, cp_model.FEASIBLE):
+        print("  ✗ Repair failed — could not find feasible rescheduling")
+        return len(failed_ais)
+
+    # Update assignments in-place
+    for fi, ai in enumerate(free_ais):
+        if start_vars[fi] is None:
+            continue  # This session couldn't be placed
+        s = sessions[assignments[ai]["orig_i"]]
+        new_start = solver.value(start_vars[fi])
+        new_iidx = solver.value(inst_vars_r[fi])
+        new_ridx = solver.value(room_vars_r[fi])
+        assignments[ai]["start"] = new_start
+        assignments[ai]["end"] = new_start + s.duration
+        assignments[ai]["instructors"] = [instructor_ids[new_iidx]]
+        assignments[ai]["room"] = new_ridx
+
+    still_failed = sum(1 for a in assignments if a["room"] < 0)
+    if still_failed == 0:
+        print(f"  ✓ Repair successful! All sessions now have rooms.")
+    else:
+        print(f"  ✗ {still_failed} sessions still without rooms after repair")
+
+    return still_failed
+
+
+# ──────────────────────────────────────────────────────────────────
 # Entry point
 # ──────────────────────────────────────────────────────────────────
+
+
+def build_schedule_json(
+    assignments: list[dict],
+    sessions: list[Session],
+    store: DataStore,
+    room_ids: list[str],
+) -> list[dict]:
+    """Convert assignments (with rooms) into the standard schedule JSON."""
+    qts = store.qts
+    schedule: list[dict] = []
+    for a in assignments:
+        s = sessions[a["orig_i"]]
+        rid = room_ids[a["room"]] if a["room"] >= 0 else None
+        day_str, time_str = qts.quanta_to_time(a["start"])
+        entry = {
+            "session_index": a["orig_i"],
+            "course_id": s.course_id,
+            "course_type": s.course_type,
+            "group_ids": s.group_ids,
+            "instructor_id": a["instructors"][0] if a["instructors"] else None,
+            "instructor_name": (
+                store.instructors[a["instructors"][0]].name
+                if a["instructors"] else None
+            ),
+            "room_id": rid,
+            "start_quanta": a["start"],
+            "duration": s.duration,
+            "day": day_str,
+            "time": time_str,
+        }
+        if len(a["instructors"]) > 1:
+            entry["co_instructor_ids"] = a["instructors"][1:]
+            entry["co_instructor_names"] = [
+                store.instructors[iid].name for iid in a["instructors"][1:]
+            ]
+        schedule.append(entry)
+    return schedule
 
 
 def main() -> None:
@@ -847,6 +1569,24 @@ def main() -> None:
         help="Relax RequiresTwoInstructors — allow 1 instructor for practicals",
     )
     parser.add_argument(
+        "--cross-qualify", action="store_true",
+        help="Add theory instructors to practical pools (fix PMI bottleneck)",
+    )
+    parser.add_argument(
+        "--no-rooms", action="store_true",
+        help="Phase A mode: skip room variables entirely, assign rooms in Phase B",
+    )
+    parser.add_argument(
+        "--room-pool-limit", type=int, default=0,
+        help="When --no-rooms: model rooms for pools with ≤ N rooms (default: 0). "
+             "Recommended: 5 (handles tight pools in Phase A, defers easy large pools to Phase B)",
+    )
+    parser.add_argument(
+        "--seeds", type=int, default=1,
+        help="Number of random seeds to try (multi-start). Each seed produces a "
+             "different Phase A solution (~4s each). Best room assignment wins.",
+    )
+    parser.add_argument(
         "--export", type=str, default=None,
         help="Export solution to JSON file",
     )
@@ -863,15 +1603,24 @@ def main() -> None:
 
     # ── Build sessions ──
     print("\nBuilding sessions...")
-    sessions, instructor_ids, room_ids = build_sessions(store)
+    sessions, instructor_ids, room_ids = build_sessions(
+        store, cross_qualify=args.cross_qualify,
+    )
     print(f"  {len(sessions)} sessions generated")
 
     # ── Diagnostics ──
     if not args.no_diag:
         run_diagnostics(sessions, store, instructor_ids, room_ids)
 
-    # ── Build model ──
+    # ── Build label ──
     label_parts = ["Phase 1 (InstructorMustBeAvailable dropped)"]
+    if args.cross_qualify:
+        label_parts.append("cross-qualification ON")
+    if args.no_rooms:
+        if args.room_pool_limit > 0:
+            label_parts.append(f"rooms for pools ≤ {args.room_pool_limit}")
+        else:
+            label_parts.append("Phase A: no rooms")
     if args.relax_ictd:
         label_parts.append("SpreadAcrossDays relaxed")
     if args.relax_sre:
@@ -882,29 +1631,183 @@ def main() -> None:
         label_parts.append("RoomMustHaveFeatures relaxed")
     if args.relax_pmi:
         label_parts.append("RequiresTwoInstructors relaxed")
-    print(f"\nBuilding CP-SAT model ({', '.join(label_parts)})...")
 
-    model, vars_dict = build_phase1_model(
-        sessions, store, instructor_ids, room_ids,
-        relax_ictd=args.relax_ictd,
-        relax_sre=args.relax_sre,
-        relax_fte=args.relax_fte,
-        relax_ffc=args.relax_ffc,
-        relax_pmi=args.relax_pmi,
-    )
+    # ── Non-decomposed mode (rooms in Phase A) ──
+    if not args.no_rooms:
+        print(f"\nBuilding CP-SAT model ({', '.join(label_parts)})...")
+        model, vars_dict = build_phase1_model(
+            sessions, store, instructor_ids, room_ids,
+            relax_ictd=args.relax_ictd,
+            relax_sre=args.relax_sre,
+            relax_fte=args.relax_fte,
+            relax_ffc=args.relax_ffc,
+            relax_pmi=args.relax_pmi,
+            no_rooms=False,
+            room_pool_limit=args.room_pool_limit,
+        )
+        proto = model.proto
+        print(f"\n  Model size:")
+        print(f"    Variables:   {len(proto.variables)}")
+        print(f"    Constraints: {len(proto.constraints)}")
 
-    proto = model.proto
-    print(f"\n  Model size:")
-    print(f"    Variables:   {len(proto.variables)}")
-    print(f"    Constraints: {len(proto.constraints)}")
+        result, solver = solve_and_report(
+            model, sessions, store, instructor_ids, room_ids,
+            vars_dict, time_limit=args.time_limit, export_path=args.export,
+        )
+        sys.exit(0 if result else 1)
 
-    # ── Solve ──
-    result = solve_and_report(
-        model, sessions, store, instructor_ids, room_ids,
-        vars_dict, time_limit=args.time_limit, export_path=args.export,
-    )
+    # ── Decomposed mode: Phase A (time+inst) → Phase B (greedy rooms) ──
+    n_seeds = max(1, args.seeds)
+    best_failed = len(sessions) + 1
+    best_assignments: list[dict] | None = None
+    best_failed_ais: list[int] = []
+    total_t0 = time.time()
 
-    sys.exit(0 if result else 1)
+    print(f"\n{'=' * 72}")
+    if args.room_pool_limit > 0:
+        print(f"  Warm-Start: Phase A (no rooms) → hint Phase A+ (rooms ≤ {args.room_pool_limit}) → greedy")
+    else:
+        print(f"  Multi-Start: {n_seeds} seed(s), Phase A + greedy rooms")
+    print(f"{'=' * 72}")
+
+    for seed_i in range(n_seeds):
+        seed = seed_i + 1
+        print(f"\n{'─' * 72}")
+        print(f"  Seed {seed}/{n_seeds}")
+        print(f"{'─' * 72}")
+
+        # Step 1: Fast Phase A solve (no rooms, ~5s)
+        model_a, vars_a = build_phase1_model(
+            sessions, store, instructor_ids, room_ids,
+            relax_ictd=args.relax_ictd,
+            relax_sre=args.relax_sre,
+            relax_fte=args.relax_fte,
+            relax_ffc=args.relax_ffc,
+            relax_pmi=args.relax_pmi,
+            no_rooms=True,
+            room_pool_limit=0,  # Pure no-rooms for fast solve
+        )
+
+        if seed_i == 0:
+            proto = model_a.proto
+            print(f"  Phase A model: {len(proto.variables)} vars, {len(proto.constraints)} constraints")
+
+        # Quick solve: 10s should be plenty for the no-rooms model
+        phase_a_limit = min(15, args.time_limit)
+        result, solver_a = solve_and_report(
+            model_a, sessions, store, instructor_ids, room_ids,
+            vars_a, time_limit=phase_a_limit,
+            random_seed=seed,
+        )
+
+        if not result or solver_a is None:
+            print(f"  Seed {seed}: Phase A failed")
+            continue
+
+        # Extract Phase A solution and run greedy rooms
+        assignments = extract_assignments(solver_a, sessions, instructor_ids, vars_a)
+        n_failed, failed_ais = phase_b_room_assignment(
+            assignments, sessions, store, room_ids,
+        )
+
+        # Step 2: If room_pool_limit > 0 and still failures, warm-start
+        if args.room_pool_limit > 0 and n_failed > 0:
+            remaining_time = max(10, args.time_limit - phase_a_limit)
+            print(f"\n  Phase A+: Warm-starting hybrid model (rooms ≤ {args.room_pool_limit}), {remaining_time}s...")
+
+            model_b, vars_b = build_phase1_model(
+                sessions, store, instructor_ids, room_ids,
+                relax_ictd=args.relax_ictd,
+                relax_sre=args.relax_sre,
+                relax_fte=args.relax_fte,
+                relax_ffc=args.relax_ffc,
+                relax_pmi=args.relax_pmi,
+                no_rooms=True,
+                room_pool_limit=args.room_pool_limit,
+            )
+
+            n_hints = add_warm_start_hints(
+                model_b, vars_b, solver_a, vars_a, assignments
+            )
+            print(f"  Added {n_hints} solution hints from Phase A + greedy rooms")
+
+            result_b, solver_b = solve_and_report(
+                model_b, sessions, store, instructor_ids, room_ids,
+                vars_b, time_limit=remaining_time,
+                random_seed=seed,
+            )
+
+            if result_b and solver_b is not None:
+                assignments = extract_assignments(solver_b, sessions, instructor_ids, vars_b)
+                n_failed, failed_ais = phase_b_room_assignment(
+                    assignments, sessions, store, room_ids,
+                )
+
+        print(f"  Seed {seed} result: {n_failed} failed room assignments")
+
+        if n_failed < best_failed:
+            best_failed = n_failed
+            best_assignments = [a.copy() for a in assignments]
+            best_failed_ais = list(failed_ais)
+
+        if n_failed == 0:
+            print(f"\n  ✓ Perfect solution found at seed {seed}!")
+            break
+
+    total_elapsed = time.time() - total_t0
+
+    # ── Phase C: Repair remaining failures ──
+    if best_assignments is not None and best_failed > 0:
+        print(f"\n  Best seed had {best_failed} room failures. Running Phase C repair...")
+        still_failed = phase_c_repair(
+            best_assignments, best_failed_ais,
+            sessions, store, instructor_ids, room_ids,
+            time_limit=min(60, args.time_limit),
+        )
+        best_failed = still_failed
+        total_elapsed = time.time() - total_t0
+
+    # ── Final report ──
+    print(f"\n{'=' * 72}")
+    print(f"  FINAL RESULTS")
+    print(f"{'=' * 72}")
+    print(f"  Seeds tried:          {min(seed_i + 1, n_seeds)}")
+    print(f"  Total time:           {total_elapsed:.1f}s")
+    print(f"  Best room failures:   {best_failed}")
+
+    if best_assignments is not None and best_failed == 0:
+        schedule = build_schedule_json(best_assignments, sessions, store, room_ids)
+
+        # Room utilization stats
+        room_usage: dict[str, int] = defaultdict(int)
+        for a in best_assignments:
+            if a["room"] >= 0:
+                room_usage[room_ids[a["room"]]] += a["duration"]
+
+        print(f"  Sessions scheduled:   {len(schedule)}")
+        print(f"  Rooms used:           {len(room_usage)}/{len(room_ids)}")
+        print(f"\n  Room utilization (top 10):")
+        for rid, load in sorted(room_usage.items(), key=lambda x: -x[1])[:10]:
+            print(f"    {rid:10s}  {load:3d} quanta")
+
+        if args.export:
+            with open(args.export, "w") as f:
+                json.dump(schedule, f, indent=2)
+            print(f"\n  Schedule exported to: {args.export}")
+
+        sys.exit(0)
+    else:
+        if best_assignments is not None:
+            print(f"\n  Best attempt: {best_failed} sessions without rooms")
+            for a in best_assignments:
+                if a["room"] < 0:
+                    s = sessions[a["orig_i"]]
+                    print(f"    S{a['orig_i']}: {s.course_id} ({s.course_type}) "
+                          f"pool={len(a['compatible_rooms'])}")
+        else:
+            print("\n  No feasible Phase A solution found!")
+
+        sys.exit(1)
 
 
 if __name__ == "__main__":
