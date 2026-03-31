@@ -19,6 +19,7 @@ The **University Course Timetabling Problem (UCTP)** requires assigning every co
 A *quantum* is the atomic time unit (1 hour). The week contains 42 schedulable quanta across Sunday–Friday (Saturday closed, 10:00–17:00 daily).
 
 Each course-group pair is decomposed into **subsessions**:
+
 - **Theory**: split into 2-quanta blocks (with a 1-quanta remainder if odd). E.g., 5 quanta/week → `[2, 2, 1]`.
 - **Practical**: single contiguous block. E.g., 3 quanta/week → `[3]`.
 
@@ -92,6 +93,7 @@ For each session $i$ and qualified instructor $j$:
 $$b^{inst}_{i,j} \in \{0, 1\}$$
 
 With the constraint:
+
 - Theory: $\sum_j b^{inst}_{i,j} = 1$ (ExactlyOne)
 - Practical: $\sum_j b^{inst}_{i,j} = 2$ (RequiresTwoInstructors)
 
@@ -116,6 +118,7 @@ This is CP-SAT's native `NewOptionalIntervalVar`. When the boolean is 0, the int
 **Symmetry breaking**: Sibling sessions are ordered by start time ($\text{start}_{s_1} < \text{start}_{s_2} < \ldots$), eliminating equivalent permutations.
 
 #### Solver Configuration
+
 - Time limit: 15 seconds
 - Workers: 8 parallel threads
 - Result: SAT (feasible) — typically found in <5s
@@ -142,6 +145,7 @@ Three mutually exclusive outcomes:
 $$b^{before}_{i,j} + b^{after}_{i,j} + b^{overlap}_{i,j} \geq 1$$
 
 Where:
+
 - $b^{before}_{i,j} = 1 \implies \text{end}_i \leq \text{start}_j$
 - $b^{after}_{i,j} = 1 \implies \text{end}_j \leq \text{start}_i$
 - $b^{overlap}_{i,j} = 1 \implies$ sessions overlap in time
@@ -151,6 +155,7 @@ Where:
 $$\min \sum_{(i,j) \in \text{small pools}} w_p \cdot b^{overlap}_{i,j}$$
 
 Where $w_p = 10 \times (6 - p)$ — tighter pools get heavier penalties:
+
 - Pool size 2: weight 40
 - Pool size 3: weight 30
 - Pool size 5: weight 10
@@ -199,6 +204,7 @@ For each unassigned session s:
 ## 4. Variable & Constraint Summary
 
 ### Phase A (no rooms)
+
 | Component | Count |
 |-----------|-------|
 | Mandatory interval vars | 790 |
@@ -211,6 +217,7 @@ For each unassigned session s:
 | Total constraints | ~9,700 |
 
 ### Phase A+ (with room pool penalties)
+
 | Component | Count |
 |-----------|-------|
 | Additional overlap booleans | ~1,700 pairs |
@@ -219,6 +226,7 @@ For each unassigned session s:
 | Objective terms | ~1,700 |
 
 ### Phase B (greedy)
+
 | Component | Count |
 |-----------|-------|
 | Algorithm | Greedy + depth-2 steal |
@@ -308,7 +316,7 @@ CP-SAT's native scheduling primitives (`IntervalVar`, `NoOverlap`, `AddAllDiffer
 
 ## 8. References
 
-1. **Google OR-Tools CP-SAT**: https://developers.google.com/optimization/cp/cp_solver
+1. **Google OR-Tools CP-SAT**: <https://developers.google.com/optimization/cp/cp_solver>
 2. **Interval Variables in CP-SAT**: Laurent Perron, Frédéric Didier. "Scheduling with CP-SAT." CP 2023.
 3. **UCTP Benchmark**: Carter, M.W., Laporte, G., Lee, S.Y. "Examination Timetabling: Algorithmic Strategies and Applications." JORS, 1996.
 4. **LNS in CP-SAT**: The solver internally uses Large Neighborhood Search with multiple worker strategies (default_lp, no_lp, quick_restart, feasibility_pump, graph_var_lns, scheduling_intervals_lns, etc.).
