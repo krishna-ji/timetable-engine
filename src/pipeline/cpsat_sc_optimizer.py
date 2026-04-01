@@ -69,6 +69,7 @@ class SCOptimizerConfig:
     num_workers: int = 8
     log_progress: bool = True
     relax_ictd: bool = False
+    relaxed_hc_names: set[str] | None = None  # HC names to ignore in feasibility check
 
     def __post_init__(self) -> None:
         if self.time_budget_seconds <= 0:
@@ -367,6 +368,8 @@ class SCOptimizer:
         model: cp_model.CpModel,
         sessions: list[_Session],
         model_indices: list[int],
+        *,
+        relaxed_hc_names: set[str] | None = None,
     ) -> dict:
         """Create start/end/day/interval vars, room bools, instructor bools."""
         qts = self._qts
@@ -429,7 +432,8 @@ class SCOptimizer:
                 b = model.new_bool_var(f"instr_{mi}_{iidx}")
                 instr_bool[(mi, iidx)] = b
                 session_instr_bools.append(b)
-            if s.course_type == "practical":
+            relax_pmi = relaxed_hc_names and "PMI" in relaxed_hc_names
+            if s.course_type == "practical" and not relax_pmi:
                 model.add(sum(session_instr_bools) == 2)
             else:
                 model.add_exactly_one(session_instr_bools)
@@ -480,6 +484,7 @@ class SCOptimizer:
         vars_dict: dict,
         *,
         relax_ictd: bool = False,
+        relaxed_hc_names: set[str] | None = None,
     ) -> None:
         """Encode all 9 hard constraints in the CP-SAT model.
 
@@ -493,6 +498,7 @@ class SCOptimizer:
         - ICTD: SpreadAcrossDays (AllDifferent on day vars per sibling group)
         - PMI: RequiresTwoInstructors (sum==2, already in _build_core_variables)
         """
+        relaxed = relaxed_hc_names or set()
         model_indices = vars_dict["model_indices"]
         interval_vars = vars_dict["interval"]
         day_vars = vars_dict["day"]
@@ -530,38 +536,39 @@ class SCOptimizer:
         # (instructor bools only for qualified, room bools only for compatible)
 
         # FCA: InstructorMustBeAvailable
-        instr_bool = vars_dict["instr_bool"]
-        for mi, orig_i in enumerate(model_indices):
-            s = sessions[orig_i]
-            for iidx in s.qualified_instructor_idxs:
-                iid = self._instructor_ids[iidx]
-                instr = self._store.instructors[iid]
-                if instr.is_full_time:
-                    continue
-                # Part-time: for each possible start, check if all quanta are available
-                avail = instr.available_quanta
-                qts = self._qts
-                day_offsets = vars_dict["day_offsets"]
-                day_lengths = vars_dict["day_lengths"]
-                valid_starts = _compute_valid_starts(
-                    s.duration, qts.total_quanta, day_offsets, day_lengths
-                )
-                forbidden_starts = []
-                for sq in valid_starts:
-                    for q in range(sq, sq + s.duration):
-                        if q not in avail:
-                            forbidden_starts.append(sq)
-                            break
-                if forbidden_starts:
-                    b = instr_bool.get((mi, iidx))
-                    if b is not None:
-                        for sq in forbidden_starts:
-                            model.add(start_vars[mi] != sq).only_enforce_if(b)
+        if "FCA" not in relaxed:
+            instr_bool = vars_dict["instr_bool"]
+            for mi, orig_i in enumerate(model_indices):
+                s = sessions[orig_i]
+                for iidx in s.qualified_instructor_idxs:
+                    iid = self._instructor_ids[iidx]
+                    instr = self._store.instructors[iid]
+                    if instr.is_full_time:
+                        continue
+                    # Part-time: for each possible start, check if all quanta are available
+                    avail = instr.available_quanta
+                    qts = self._qts
+                    day_offsets = vars_dict["day_offsets"]
+                    day_lengths = vars_dict["day_lengths"]
+                    valid_starts = _compute_valid_starts(
+                        s.duration, qts.total_quanta, day_offsets, day_lengths
+                    )
+                    forbidden_starts = []
+                    for sq in valid_starts:
+                        for q in range(sq, sq + s.duration):
+                            if q not in avail:
+                                forbidden_starts.append(sq)
+                                break
+                    if forbidden_starts:
+                        b = instr_bool.get((mi, iidx))
+                        if b is not None:
+                            for sq in forbidden_starts:
+                                model.add(start_vars[mi] != sq).only_enforce_if(b)
 
         # CQF: Structural (session durations are fixed; guaranteed by build_sessions)
 
         # ICTD: SpreadAcrossDays
-        if not relax_ictd:
+        if not relax_ictd and "ICTD" not in relaxed:
             sibling_groups: dict[tuple, list[int]] = defaultdict(list)
             for mi, orig_i in enumerate(model_indices):
                 s = sessions[orig_i]
@@ -675,9 +682,20 @@ class SCOptimizer:
 
         penalty_vars: list[cp_model.IntVar] = []
 
-        for gid, midxs in group_sessions.items():
+        for gid, raw_midxs in group_sessions.items():
+            # Skip multi-day sessions (dur > quanta_per_day) — within-day
+            # compactness is not meaningful for sessions spanning days
+            midxs = [
+                mi for mi in raw_midxs
+                if sessions[model_indices[mi]].duration <= quanta_per_day
+            ]
             if len(midxs) < 2:
                 continue
+
+            # Max possible sum of durations if all sessions land on one day
+            max_dur_sum = sum(
+                sessions[model_indices[mi]].duration for mi in midxs
+            )
 
             for d_idx in range(num_days):
                 # Create boolean: is session mi on day d_idx?
@@ -713,68 +731,37 @@ class SCOptimizer:
                     within_day_starts.append((wd_start, b_on_day, s.duration))
 
                 # First and last occupied quantum (within day)
+                # Use simple bound constraints — solver tightens to exact
+                # min/max when minimizing the gap objective (avoids LinMax).
                 first_q = model.new_int_var(
-                    0, quanta_per_day - 1, f"csc_first_{gid}_d{d_idx}"
+                    0, quanta_per_day, f"csc_first_{gid}_d{d_idx}"
                 )
                 last_q = model.new_int_var(
-                    0, quanta_per_day - 1, f"csc_last_{gid}_d{d_idx}"
+                    0, quanta_per_day, f"csc_last_{gid}_d{d_idx}"
                 )
 
                 # Compute occupied quanta count
                 total_occ = model.new_int_var(
-                    0, quanta_per_day, f"csc_occ_{gid}_d{d_idx}"
+                    0, max_dur_sum, f"csc_occ_{gid}_d{d_idx}"
                 )
                 model.add(total_occ == sum(dur * b for _, b, dur in within_day_starts))
 
-                # min/max over within-day starts for sessions on this day
-                # We use conditional constraints: first_q <= wd_start when
-                # b_on_day is true, and first_q == min of those
-                # For simplicity, use add_min_equality with a large sentinel
-                sentinel_high = quanta_per_day
-                sentinel_low = 0
-                min_targets = []
-                max_targets = []
+                # Bound constraints: first_q <= wd_start, last_q >= wd_end
                 for wd_start, b_on_day, dur in within_day_starts:
-                    # For min: if on day, use wd_start; else sentinel_high
-                    min_t = model.new_int_var(
-                        0, sentinel_high, f"csc_mint_{gid}_{id(wd_start)}_d{d_idx}"
+                    model.add(first_q <= wd_start).only_enforce_if(b_on_day)
+                    model.add(last_q >= wd_start + dur - 1).only_enforce_if(
+                        b_on_day
                     )
-                    model.add(min_t == wd_start).only_enforce_if(b_on_day)
-                    model.add(min_t == sentinel_high).only_enforce_if(
-                        b_on_day.negated()
-                    )
-                    min_targets.append(min_t)
 
-                    # For max: if on day, use wd_start + dur - 1; else sentinel_low
-                    max_t = model.new_int_var(
-                        0, quanta_per_day, f"csc_maxt_{gid}_{id(wd_start)}_d{d_idx}"
-                    )
-                    model.add(max_t == wd_start + dur - 1).only_enforce_if(b_on_day)
-                    model.add(max_t == sentinel_low).only_enforce_if(b_on_day.negated())
-                    max_targets.append(max_t)
-
-                model.add_min_equality(first_q, min_targets)
-                model.add_max_equality(last_q, max_targets)
-
-                # Gap = (last_q - first_q + 1) - total_occupied - break_in_span
-                # We approximate break overlap as a constant (break quanta count
-                # for this day, capped by span)
+                # penalty = max(0, last_q - first_q + 1 - total_occ - brk)
                 brk = break_counts.get(d_idx, 0)
-                gap = model.new_int_var(0, quanta_per_day, f"csc_gap_{gid}_d{d_idx}")
-                span = model.new_int_var(0, quanta_per_day, f"csc_span_{gid}_d{d_idx}")
-                model.add(span == last_q - first_q + 1)
-                # gap = max(0, span - total_occ - brk)
-                raw_gap = model.new_int_var(
-                    -quanta_per_day, quanta_per_day, f"csc_rgap_{gid}_d{d_idx}"
-                )
-                model.add(raw_gap == span - total_occ - brk)
-                model.add_max_equality(gap, [raw_gap, model.new_constant(0)])
-
-                # Only apply penalty when has_multiple
                 csc_penalty = model.new_int_var(
                     0, quanta_per_day, f"csc_pen_{gid}_d{d_idx}"
                 )
-                model.add(csc_penalty == gap).only_enforce_if(has_multiple)
+                # Solver tightens to exact max(0, gap) when minimising.
+                model.add(
+                    csc_penalty >= last_q - first_q + 1 - total_occ - brk
+                ).only_enforce_if(has_multiple)
                 model.add(csc_penalty == 0).only_enforce_if(has_multiple.negated())
                 penalty_vars.append(csc_penalty)
 
@@ -815,9 +802,19 @@ class SCOptimizer:
 
         penalty_vars: list[cp_model.IntVar] = []
 
-        for iidx, midxs in instr_sessions.items():
+        for iidx, raw_midxs in instr_sessions.items():
+            # Skip multi-day sessions (dur > quanta_per_day)
+            midxs = [
+                mi for mi in raw_midxs
+                if sessions[model_indices[mi]].duration <= quanta_per_day
+            ]
             if len(midxs) < 2:
                 continue
+
+            # Max possible sum of durations if all sessions land on one day
+            max_dur_sum = sum(
+                sessions[model_indices[mi]].duration for mi in midxs
+            )
 
             for d_idx in range(num_days):
                 # Boolean: instructor iidx teaches session mi AND session is on day d_idx
@@ -851,16 +848,14 @@ class SCOptimizer:
                 model.add(count_on_day <= 1).only_enforce_if(has_multiple.negated())
 
                 day_offset = day_offsets[d_idx]
-                sentinel_high = quanta_per_day
-                sentinel_low = 0
-                min_targets = []
-                max_targets = []
 
                 total_occ = model.new_int_var(
-                    0, quanta_per_day, f"fsc_occ_{iidx}_d{d_idx}"
+                    0, max_dur_sum, f"fsc_occ_{iidx}_d{d_idx}"
                 )
                 model.add(total_occ == sum(dur * b for _, b, dur in on_day_bools))
 
+                # -- within-day start vars (needed for bound constraints) --
+                within_day_starts: list[tuple[cp_model.IntVar, cp_model.IntVar, int]] = []
                 for mi, b_both, dur in on_day_bools:
                     wd_start = model.new_int_var(
                         0, quanta_per_day, f"fsc_wd_{iidx}_{mi}_d{d_idx}"
@@ -869,47 +864,30 @@ class SCOptimizer:
                         b_both
                     )
                     model.add(wd_start == 0).only_enforce_if(b_both.negated())
+                    within_day_starts.append((wd_start, b_both, dur))
 
-                    min_t = model.new_int_var(
-                        0, sentinel_high, f"fsc_mint_{iidx}_{mi}_d{d_idx}"
-                    )
-                    model.add(min_t == wd_start).only_enforce_if(b_both)
-                    model.add(min_t == sentinel_high).only_enforce_if(b_both.negated())
-                    min_targets.append(min_t)
-
-                    max_t = model.new_int_var(
-                        0, quanta_per_day, f"fsc_maxt_{iidx}_{mi}_d{d_idx}"
-                    )
-                    model.add(max_t == wd_start + dur - 1).only_enforce_if(b_both)
-                    model.add(max_t == sentinel_low).only_enforce_if(b_both.negated())
-                    max_targets.append(max_t)
-
-                if not min_targets:
+                if not within_day_starts:
                     continue
 
+                # -- bound constraints instead of LinMax --
+                # Solver tightens first_q→min, last_q→max when minimising gap.
                 first_q = model.new_int_var(
-                    0, quanta_per_day - 1, f"fsc_first_{iidx}_d{d_idx}"
+                    0, quanta_per_day, f"fsc_first_{iidx}_d{d_idx}"
                 )
                 last_q = model.new_int_var(
-                    0, quanta_per_day - 1, f"fsc_last_{iidx}_d{d_idx}"
+                    0, quanta_per_day, f"fsc_last_{iidx}_d{d_idx}"
                 )
-                model.add_min_equality(first_q, min_targets)
-                model.add_max_equality(last_q, max_targets)
+                for wd_start, b_both, dur in within_day_starts:
+                    model.add(first_q <= wd_start).only_enforce_if(b_both)
+                    model.add(last_q >= wd_start + dur - 1).only_enforce_if(b_both)
 
                 brk = break_counts.get(d_idx, 0)
-                span = model.new_int_var(0, quanta_per_day, f"fsc_span_{iidx}_d{d_idx}")
-                model.add(span == last_q - first_q + 1)
-                raw_gap = model.new_int_var(
-                    -quanta_per_day, quanta_per_day, f"fsc_rgap_{iidx}_d{d_idx}"
-                )
-                model.add(raw_gap == span - total_occ - brk)
-                gap = model.new_int_var(0, quanta_per_day, f"fsc_gap_{iidx}_d{d_idx}")
-                model.add_max_equality(gap, [raw_gap, model.new_constant(0)])
-
                 fsc_penalty = model.new_int_var(
                     0, quanta_per_day, f"fsc_pen_{iidx}_d{d_idx}"
                 )
-                model.add(fsc_penalty == gap).only_enforce_if(has_multiple)
+                model.add(
+                    fsc_penalty >= last_q - first_q + 1 - total_occ - brk
+                ).only_enforce_if(has_multiple)
                 model.add(fsc_penalty == 0).only_enforce_if(has_multiple.negated())
                 penalty_vars.append(fsc_penalty)
 
@@ -967,17 +945,10 @@ class SCOptimizer:
                     occupies_bools = []
                     for mi in midxs:
                         s = sessions[model_indices[mi]]
-                        # Session occupies abs_q iff start <= abs_q < end
+                        # Session occupies abs_q iff start <= abs_q AND end > abs_q
                         b_occ = model.new_bool_var(
                             f"mip_occ_{gid}_{mi}_d{d_idx}_q{bw_q}"
                         )
-                        model.add(start_vars[mi] <= abs_q).only_enforce_if(b_occ)
-                        model.add(end_vars[mi] > abs_q).only_enforce_if(b_occ)
-                        model.add(start_vars[mi] > abs_q).only_enforce_if(
-                            b_occ.negated()
-                        )
-                        # Actually: b_occ is true iff start <= abs_q AND end > abs_q
-                        # We need an AND here. Use auxiliary.
                         b_start_ok = model.new_bool_var(
                             f"mip_sok_{gid}_{mi}_d{d_idx}_q{bw_q}"
                         )
@@ -1149,14 +1120,11 @@ class SCOptimizer:
         if not qts.enforce_break_placement:
             return []
 
-        # Reuse MIP penalty structure — they share the same modeling pattern
-        # Both count occupied quanta in a window per group per day
-        # The break window is break_window_start..break_window_end
-        # This is already captured by MIP penalty since they use the same window
-        # BPC differs only in: it counts violations (0/1) not missing quanta
-        # For the CP-SAT model, we use the same penalty vars — the objective
-        # weight handles the distinction
-        return self._add_mip_penalty(model, sessions, vars_dict)
+        # BPC and MIP share the same break-window model.  The objective
+        # weight handles their distinction, so we return an empty list
+        # here to avoid creating duplicate constraints & variables.
+        # The MIP penalty vars already model break occupancy.
+        return []
 
     # ── T015 + T021: Build objective ──
 
@@ -1248,6 +1216,76 @@ class SCOptimizer:
 
         return genes
 
+    # ── Fix assignments from input ──
+
+    def _fix_assignments(
+        self,
+        model: cp_model.CpModel,
+        vars_dict: dict,
+        sessions: list[_Session],
+        input_genes: list[SessionGene],
+    ) -> int:
+        """Fix room and instructor assignments from the input schedule.
+
+        Adds model.add(b==1/0) constraints so the solver only optimizes
+        start times.  Presolve collapses optional intervals → mandatory,
+        dramatically reducing model size.
+
+        Returns number of fixed sessions.
+        """
+        model_indices = vars_dict["model_indices"]
+        room_bool = vars_dict["room_bool"]
+        instr_bool = vars_dict["instr_bool"]
+
+        room_to_idx = {rid: i for i, rid in enumerate(self._room_ids)}
+
+        gene_lookup: dict[tuple, list[SessionGene]] = defaultdict(list)
+        for gene in input_genes:
+            key = (gene.course_id, gene.course_type, tuple(sorted(gene.group_ids)))
+            gene_lookup[key].append(gene)
+        for genes_list in gene_lookup.values():
+            genes_list.sort(key=lambda g: g.start_quanta)
+
+        consumed: dict[tuple, int] = defaultdict(int)
+        n_fixed = 0
+
+        for mi, orig_i in enumerate(model_indices):
+            s = sessions[orig_i]
+            key = (s.course_id, s.course_type, tuple(sorted(s.group_ids)))
+            ci = consumed[key]
+            available = gene_lookup.get(key, [])
+            if ci >= len(available):
+                continue
+            gene = available[ci]
+            consumed[key] = ci + 1
+
+            # Fix room (only if assigned room is compatible)
+            ridx_assigned = room_to_idx.get(gene.room_id)
+            if ridx_assigned is not None and ridx_assigned in s.compatible_room_idxs:
+                for ridx in s.compatible_room_idxs:
+                    b = room_bool.get((mi, ridx))
+                    if b is not None:
+                        model.add(b == (1 if ridx == ridx_assigned else 0))
+
+            # Fix instructor(s) (only if all assigned are qualified)
+            all_instr = {gene.instructor_id, *(gene.co_instructor_ids or [])}
+            instr_idxs = {
+                iidx for iidx in s.qualified_instructor_idxs
+                if self._instructor_ids[iidx] in all_instr
+            }
+            if instr_idxs and len(instr_idxs) == len(all_instr):
+                for iidx in s.qualified_instructor_idxs:
+                    iid = self._instructor_ids[iidx]
+                    b = instr_bool.get((mi, iidx))
+                    if b is not None:
+                        model.add(b == (1 if iid in all_instr else 0))
+
+            n_fixed += 1
+
+        logger.info("Fixed room/instructor assignments for %d/%d sessions",
+                     n_fixed, len(model_indices))
+        return n_fixed
+
     # ── T017: Main optimize() entry point ──
 
     def optimize(
@@ -1276,6 +1314,12 @@ class SCOptimizer:
         hard_breakdown = self._validate_hard_feasibility(timetable)
         # _roomless is informational — sessions without rooms are ok
         n_roomless = int(hard_breakdown.pop("_roomless", 0))
+        # Filter out relaxed HC names
+        relaxed = config.relaxed_hc_names or set()
+        if relaxed:
+            for name in relaxed:
+                hard_breakdown.pop(name, None)
+            logger.info("Relaxed HC constraints (skipped): %s", sorted(relaxed))
         hard_total = sum(hard_breakdown.values())
         if hard_total > 0:
             violated = {k: v for k, v in hard_breakdown.items() if v > 0}
@@ -1313,6 +1357,16 @@ class SCOptimizer:
         sessions = self._sessions
         model = cp_model.CpModel()
 
+        # Identify roomless input genes
+        roomless_key_counts: dict[tuple, int] = defaultdict(int)
+        for gene in timetable.genes:
+            if not gene.room_id:
+                key = (gene.course_id, gene.course_type, tuple(sorted(gene.group_ids)), gene.num_quanta)
+                roomless_key_counts[key] += 1
+
+        # Track consumed roomless markers per key
+        roomless_consumed: dict[tuple, int] = defaultdict(int)
+
         # Filter impossible sessions
         impossible = set()
         for i, s in enumerate(sessions):
@@ -1325,6 +1379,12 @@ class SCOptimizer:
                 )
             ):
                 impossible.add(i)
+                continue
+            # Also exclude sessions matching roomless input genes
+            key = (s.course_id, s.course_type, tuple(sorted(s.group_ids)), s.duration)
+            if roomless_consumed[key] < roomless_key_counts.get(key, 0):
+                impossible.add(i)
+                roomless_consumed[key] += 1
         model_indices = [i for i in range(len(sessions)) if i not in impossible]
 
         if impossible:
@@ -1333,26 +1393,40 @@ class SCOptimizer:
             )
 
         # T004: Build variables
-        vars_dict = self._build_core_variables(model, sessions, model_indices)
+        vars_dict = self._build_core_variables(
+            model, sessions, model_indices,
+            relaxed_hc_names=config.relaxed_hc_names,
+        )
+
+        # Fix room and instructor assignments from the input to collapse
+        # optional intervals → mandatory during presolve, dramatically
+        # reducing model size (only start times are optimized).
+        self._fix_assignments(model, vars_dict, sessions, timetable.genes)
 
         # T005: Add hard constraints
         self._add_hard_constraints(
-            model, sessions, vars_dict, relax_ictd=config.relax_ictd
+            model, sessions, vars_dict,
+            relax_ictd=config.relax_ictd,
+            relaxed_hc_names=config.relaxed_hc_names,
         )
 
         # T009-T014: Add SC penalty terms
-        penalty_terms: dict[str, list[cp_model.IntVar]] = {
-            "CSC": self._add_csc_penalty(model, sessions, vars_dict),
-            "FSC": self._add_fsc_penalty(model, sessions, vars_dict),
-            "MIP": self._add_mip_penalty(model, sessions, vars_dict),
-            "session_continuity": self._add_session_continuity_penalty(
-                model, sessions, vars_dict
-            ),
-            "SSCP": self._add_sscp_penalty(model, sessions, vars_dict),
-            "break_placement_compliance": self._add_break_placement_penalty(
-                model, sessions, vars_dict
-            ),
+        # Only add SC penalties that are targeted (or all if none targeted)
+        targeted = set(config.target_constraints) if config.target_constraints else None
+        sc_builders = {
+            "CSC": self._add_csc_penalty,
+            "FSC": self._add_fsc_penalty,
+            "MIP": self._add_mip_penalty,
+            "session_continuity": self._add_session_continuity_penalty,
+            "SSCP": self._add_sscp_penalty,
+            "break_placement_compliance": self._add_break_placement_penalty,
         }
+        penalty_terms: dict[str, list[cp_model.IntVar]] = {}
+        for sc_name, builder in sc_builders.items():
+            if targeted is not None and sc_name not in targeted:
+                penalty_terms[sc_name] = []
+                continue
+            penalty_terms[sc_name] = builder(model, sessions, vars_dict)
 
         # T015/T021: Build objective
         self._build_objective(model, penalty_terms, config)
@@ -1361,12 +1435,25 @@ class SCOptimizer:
         n_hints = self._seed_hints(model, vars_dict, sessions, timetable.genes)
         logger.info("Seeded %d hints from input solution", n_hints)
 
+        # Validate model before solving
+        validation = model.validate()
+        if validation:
+            logger.error("Model validation failed: %s", validation)
+            raise ValueError(f"Model validation failed: {validation}")
+
+        # Save model proto for debugging
+        model.export_to_file("/tmp/sc_model.pb")
+        logger.info("Saved model proto to /tmp/sc_model.pb")
+
         # Solve
         solver = cp_model.CpSolver()
         solver.parameters.max_time_in_seconds = config.time_budget_seconds
         solver.parameters.num_workers = config.num_workers
         solver.parameters.log_search_progress = config.log_progress
         solver.parameters.random_seed = config.seed
+        solver.parameters.symmetry_level = 0
+        # Work around ortools crash during search by saving model proto
+        # and using solution callback to capture solutions before crash.
 
         # Track solutions
         status = solver.solve(model)

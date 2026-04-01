@@ -83,6 +83,12 @@ def main() -> int:
         help="Relax SpreadAcrossDays hard constraint",
     )
     parser.add_argument(
+        "--relax-hc",
+        default=None,
+        help="Comma-separated HC names to ignore in feasibility check "
+        "(e.g. FPC,FCA,CQF,PMI)",
+    )
+    parser.add_argument(
         "--quiet",
         action="store_true",
         help="Suppress solver progress logging",
@@ -138,6 +144,11 @@ def main() -> int:
                 )
                 return 1
 
+    # Parse relaxed HC names
+    relaxed_hc_names = None
+    if args.relax_hc:
+        relaxed_hc_names = {s.strip() for s in args.relax_hc.split(",")}
+
     # Build config
     try:
         config = SCOptimizerConfig(
@@ -148,6 +159,7 @@ def main() -> int:
             num_workers=args.workers,
             log_progress=not args.quiet,
             relax_ictd=args.relax_ictd,
+            relaxed_hc_names=relaxed_hc_names,
         )
     except ValueError as e:
         print(f"Error: {e}", file=sys.stderr)
