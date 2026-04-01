@@ -507,30 +507,33 @@ class SCOptimizer:
         instr_opt_intervals = vars_dict["instr_opt_intervals"]
 
         # CTE: NoStudentDoubleBooking
-        group_sessions: dict[str, list[int]] = defaultdict(list)
-        for mi, orig_i in enumerate(model_indices):
-            s = sessions[orig_i]
-            for gid in set(s.group_ids):
-                group_sessions[gid].append(mi)
-        for midxs in group_sessions.values():
-            if len(midxs) > 1:
-                model.add_no_overlap([interval_vars[mi] for mi in midxs])
+        if "CTE" not in relaxed:
+            group_sessions: dict[str, list[int]] = defaultdict(list)
+            for mi, orig_i in enumerate(model_indices):
+                s = sessions[orig_i]
+                for gid in set(s.group_ids):
+                    group_sessions[gid].append(mi)
+            for midxs in group_sessions.values():
+                if len(midxs) > 1:
+                    model.add_no_overlap([interval_vars[mi] for mi in midxs])
 
         # FTE: NoInstructorDoubleBooking
-        instr_to_opts: dict[int, list[cp_model.IntervalVar]] = defaultdict(list)
-        for (_mi, iidx), opt_iv in instr_opt_intervals.items():
-            instr_to_opts[iidx].append(opt_iv)
-        for opt_ivs in instr_to_opts.values():
-            if len(opt_ivs) > 1:
-                model.add_no_overlap(opt_ivs)
+        if "FTE" not in relaxed:
+            instr_to_opts: dict[int, list[cp_model.IntervalVar]] = defaultdict(list)
+            for (_mi, iidx), opt_iv in instr_opt_intervals.items():
+                instr_to_opts[iidx].append(opt_iv)
+            for opt_ivs in instr_to_opts.values():
+                if len(opt_ivs) > 1:
+                    model.add_no_overlap(opt_ivs)
 
         # SRE: NoRoomDoubleBooking
-        room_to_opts: dict[int, list[cp_model.IntervalVar]] = defaultdict(list)
-        for (_mi, ridx), opt_iv in room_opt_intervals.items():
-            room_to_opts[ridx].append(opt_iv)
-        for opt_ivs in room_to_opts.values():
-            if len(opt_ivs) > 1:
-                model.add_no_overlap(opt_ivs)
+        if "SRE" not in relaxed:
+            room_to_opts: dict[int, list[cp_model.IntervalVar]] = defaultdict(list)
+            for (_mi, ridx), opt_iv in room_opt_intervals.items():
+                room_to_opts[ridx].append(opt_iv)
+            for opt_ivs in room_to_opts.values():
+                if len(opt_ivs) > 1:
+                    model.add_no_overlap(opt_ivs)
 
         # FPC + FFC: Already enforced via domain restriction on booleans
         # (instructor bools only for qualified, room bools only for compatible)
@@ -576,11 +579,6 @@ class SCOptimizer:
             for siblings in sibling_groups.values():
                 if len(siblings) > 1:
                     model.add_all_different([day_vars[mi] for mi in siblings])
-            # Symmetry breaking
-            for siblings in sibling_groups.values():
-                if len(siblings) > 1:
-                    for j in range(len(siblings) - 1):
-                        model.add(start_vars[siblings[j]] < start_vars[siblings[j + 1]])
 
     # ── T006: Seed hints ──
 
@@ -1224,18 +1222,29 @@ class SCOptimizer:
         vars_dict: dict,
         sessions: list[_Session],
         input_genes: list[SessionGene],
+        *,
+        fix_rooms: bool = True,
     ) -> int:
-        """Fix room and instructor assignments from the input schedule.
+        """Fix room, instructor, and day assignments from the input schedule.
 
-        Adds model.add(b==1/0) constraints so the solver only optimizes
-        start times.  Presolve collapses optional intervals → mandatory,
-        dramatically reducing model size.
+        Adds model.add(b==1/0) constraints for rooms/instructors and
+        model.add(day==d) for days, so the solver only optimizes
+        within-day start positions.  Presolve collapses optional intervals
+        → mandatory and eliminates day-selection booleans, dramatically
+        reducing model size.
+
+        Args:
+            fix_rooms: If True, fix room booleans from input. Set to False
+                when the input has SRE violations so the solver can reassign
+                rooms to resolve double-bookings.
 
         Returns number of fixed sessions.
         """
         model_indices = vars_dict["model_indices"]
         room_bool = vars_dict["room_bool"]
         instr_bool = vars_dict["instr_bool"]
+        day_vars = vars_dict["day"]
+        quanta_per_day = vars_dict["quanta_per_day"]
 
         room_to_idx = {rid: i for i, rid in enumerate(self._room_ids)}
 
@@ -1259,13 +1268,19 @@ class SCOptimizer:
             gene = available[ci]
             consumed[key] = ci + 1
 
+            # Fix day assignment — collapses all day-selection booleans in
+            # CSC/FSC/MIP during presolve, dramatically reducing model size.
+            input_day = gene.start_quanta // quanta_per_day
+            model.add(day_vars[mi] == input_day)
+
             # Fix room (only if assigned room is compatible)
-            ridx_assigned = room_to_idx.get(gene.room_id)
-            if ridx_assigned is not None and ridx_assigned in s.compatible_room_idxs:
-                for ridx in s.compatible_room_idxs:
-                    b = room_bool.get((mi, ridx))
-                    if b is not None:
-                        model.add(b == (1 if ridx == ridx_assigned else 0))
+            if fix_rooms:
+                ridx_assigned = room_to_idx.get(gene.room_id)
+                if ridx_assigned is not None and ridx_assigned in s.compatible_room_idxs:
+                    for ridx in s.compatible_room_idxs:
+                        b = room_bool.get((mi, ridx))
+                        if b is not None:
+                            model.add(b == (1 if ridx == ridx_assigned else 0))
 
             # Fix instructor(s) (only if all assigned are qualified)
             all_instr = {gene.instructor_id, *(gene.co_instructor_ids or [])}
@@ -1282,7 +1297,7 @@ class SCOptimizer:
 
             n_fixed += 1
 
-        logger.info("Fixed room/instructor assignments for %d/%d sessions",
+        logger.info("Fixed room/instructor/day assignments for %d/%d sessions",
                      n_fixed, len(model_indices))
         return n_fixed
 
@@ -1314,6 +1329,9 @@ class SCOptimizer:
         hard_breakdown = self._validate_hard_feasibility(timetable)
         # _roomless is informational — sessions without rooms are ok
         n_roomless = int(hard_breakdown.pop("_roomless", 0))
+        # Save raw breakdown before filtering (needed for fix_rooms decision)
+        hard_breakdown_raw = dict(hard_breakdown)
+        has_sre_violations = hard_breakdown_raw.get("SRE", 0) > 0
         # Filter out relaxed HC names
         relaxed = config.relaxed_hc_names or set()
         if relaxed:
@@ -1364,10 +1382,19 @@ class SCOptimizer:
                 key = (gene.course_id, gene.course_type, tuple(sorted(gene.group_ids)), gene.num_quanta)
                 roomless_key_counts[key] += 1
 
+        # Count available genes per sibling key (for matching sessions to input)
+        gene_key_counts: dict[tuple, int] = defaultdict(int)
+        for gene in timetable.genes:
+            key = (gene.course_id, gene.course_type, tuple(sorted(gene.group_ids)))
+            gene_key_counts[key] += 1
+
         # Track consumed roomless markers per key
         roomless_consumed: dict[tuple, int] = defaultdict(int)
 
-        # Filter impossible sessions
+        # Track consumed gene matches per sibling key
+        gene_consumed: dict[tuple, int] = defaultdict(int)
+
+        # Filter impossible sessions and sessions without matching genes
         impossible = set()
         for i, s in enumerate(sessions):
             if (
@@ -1381,15 +1408,22 @@ class SCOptimizer:
                 impossible.add(i)
                 continue
             # Also exclude sessions matching roomless input genes
-            key = (s.course_id, s.course_type, tuple(sorted(s.group_ids)), s.duration)
-            if roomless_consumed[key] < roomless_key_counts.get(key, 0):
+            key_dur = (s.course_id, s.course_type, tuple(sorted(s.group_ids)), s.duration)
+            if roomless_consumed[key_dur] < roomless_key_counts.get(key_dur, 0):
                 impossible.add(i)
-                roomless_consumed[key] += 1
+                roomless_consumed[key_dur] += 1
+                continue
+            # Exclude sessions that have no matching gene in the input
+            sib_key = (s.course_id, s.course_type, tuple(sorted(s.group_ids)))
+            if gene_consumed[sib_key] >= gene_key_counts.get(sib_key, 0):
+                impossible.add(i)
+                continue
+            gene_consumed[sib_key] += 1
         model_indices = [i for i in range(len(sessions)) if i not in impossible]
 
         if impossible:
             logger.warning(
-                "Excluded %d impossible sessions from model", len(impossible)
+                "Excluded %d impossible/unmatched sessions from model", len(impossible)
             )
 
         # T004: Build variables
@@ -1404,10 +1438,17 @@ class SCOptimizer:
         self._fix_assignments(model, vars_dict, sessions, timetable.genes)
 
         # T005: Add hard constraints
+        # CTE/FTE (no-student/instructor-overlap) are always enforced.
+        # SRE (room-overlap) is enforced only if the input has no SRE
+        # violations; otherwise relaxing rooms is the only option.
+        structural_always_enforced = {"CTE", "FTE"}
+        if not has_sre_violations:
+            structural_always_enforced.add("SRE")
+        model_relaxed = (config.relaxed_hc_names or set()) - structural_always_enforced
         self._add_hard_constraints(
             model, sessions, vars_dict,
             relax_ictd=config.relax_ictd,
-            relaxed_hc_names=config.relaxed_hc_names,
+            relaxed_hc_names=model_relaxed,
         )
 
         # T009-T014: Add SC penalty terms
@@ -1441,21 +1482,13 @@ class SCOptimizer:
             logger.error("Model validation failed: %s", validation)
             raise ValueError(f"Model validation failed: {validation}")
 
-        # Save model proto for debugging
-        model.export_to_file("/tmp/sc_model.pb")
-        logger.info("Saved model proto to /tmp/sc_model.pb")
-
         # Solve
         solver = cp_model.CpSolver()
         solver.parameters.max_time_in_seconds = config.time_budget_seconds
         solver.parameters.num_workers = config.num_workers
         solver.parameters.log_search_progress = config.log_progress
         solver.parameters.random_seed = config.seed
-        solver.parameters.symmetry_level = 0
-        # Work around ortools crash during search by saving model proto
-        # and using solution callback to capture solutions before crash.
 
-        # Track solutions
         status = solver.solve(model)
         solve_time = time.time() - t_start
 
