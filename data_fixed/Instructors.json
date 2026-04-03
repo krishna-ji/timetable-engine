@@ -25,7 +25,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I3",
@@ -64,7 +69,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 12
+    }
   },
   {
     "id": "I5",
@@ -187,7 +196,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 27,
+      "practical": 9
+    }
   },
   {
     "id": "I6",
@@ -209,7 +222,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I7",
@@ -228,7 +246,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 18
+    }
   },
   {
     "id": "I8",
@@ -291,7 +313,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 20,
+      "practical": 9
+    }
   },
   {
     "id": "I9",
@@ -315,7 +341,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I10",
@@ -334,7 +365,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 11
+    }
   },
   {
     "id": "I11",
@@ -397,7 +432,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 7,
+      "practical": 17
+    }
   },
   {
     "id": "I13",
@@ -424,7 +463,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 8
+    }
   },
   {
     "id": "I14",
@@ -447,7 +490,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 3
+    }
   },
   {
     "id": "I15",
@@ -498,7 +545,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 17,
+      "practical": 5
+    }
   },
   {
     "id": "I16",
@@ -517,7 +568,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 3
+    }
   },
   {
     "id": "I17",
@@ -536,7 +591,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 5
+    }
   },
   {
     "id": "I18",
@@ -567,7 +626,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 18
+    }
   },
   {
     "id": "I19",
@@ -590,7 +653,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 7
+    }
   },
   {
     "id": "I20",
@@ -613,7 +680,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 6
+    }
   },
   {
     "id": "I21",
@@ -640,7 +711,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 7
+    }
   },
   {
     "id": "I27",
@@ -674,7 +749,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 10
+    },
+    "availableHoursPerWeek": 8.2
   },
   {
     "id": "I28",
@@ -692,7 +772,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 2.2
   },
   {
     "id": "I31",
@@ -716,7 +801,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 12
+    },
+    "availableHoursPerWeek": 7.5
   },
   {
     "id": "I32",
@@ -740,7 +830,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I33",
@@ -764,7 +859,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.0
   },
   {
     "id": "I35",
@@ -818,7 +918,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 11.2
   },
   {
     "id": "I37",
@@ -874,7 +979,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 12.8
   },
   {
     "id": "I38",
@@ -912,7 +1022,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 11.2
   },
   {
     "id": "I39",
@@ -943,7 +1058,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 4
+    }
   },
   {
     "id": "I40",
@@ -967,7 +1086,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.0
   },
   {
     "id": "I41",
@@ -1001,7 +1125,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 11
+    },
+    "availableHoursPerWeek": 6.8
   },
   {
     "id": "I43",
@@ -1035,7 +1164,12 @@
           "end": "15:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 9.0
   },
   {
     "id": "I45",
@@ -1073,7 +1207,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 9.0
   },
   {
     "id": "I46",
@@ -1097,7 +1236,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 15
+    },
+    "availableHoursPerWeek": 9.8
   },
   {
     "id": "I47",
@@ -1135,7 +1279,12 @@
           "end": "10:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 12
+    },
+    "availableHoursPerWeek": 11.2
   },
   {
     "id": "I49",
@@ -1175,7 +1324,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 6
+    },
+    "availableHoursPerWeek": 13.5
   },
   {
     "id": "I51",
@@ -1199,7 +1353,12 @@
           "end": "14:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I53",
@@ -1223,7 +1382,12 @@
           "end": "15:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 8.2
   },
   {
     "id": "I59",
@@ -1261,7 +1425,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 13.5
   },
   {
     "id": "I61",
@@ -1285,7 +1454,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 15
+    },
+    "availableHoursPerWeek": 9.8
   },
   {
     "id": "I64",
@@ -1333,7 +1507,12 @@
           "end": "13:45"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 10
+    },
+    "availableHoursPerWeek": 10.5
   },
   {
     "id": "I65",
@@ -1352,7 +1531,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 4
+    }
   },
   {
     "id": "I66",
@@ -1403,7 +1586,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 12
+    }
   },
   {
     "id": "I67",
@@ -1418,7 +1605,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 2
+    }
   },
   {
     "id": "I68",
@@ -1437,7 +1628,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 12
+    }
   },
   {
     "id": "I69",
@@ -1456,7 +1651,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 14
+    }
   },
   {
     "id": "I70",
@@ -1483,7 +1682,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    }
   },
   {
     "id": "I71",
@@ -1506,7 +1709,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 10
+    }
   },
   {
     "id": "I72",
@@ -1544,7 +1751,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 7
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I74",
@@ -1578,7 +1790,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I75",
@@ -1618,7 +1835,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 15.0
   },
   {
     "id": "I76",
@@ -1649,7 +1871,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 8
+    }
   },
   {
     "id": "I78",
@@ -1673,7 +1899,12 @@
           "end": "13:45"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I79",
@@ -1709,7 +1940,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 9.0
   },
   {
     "id": "I82",
@@ -1753,7 +1989,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 12.0
   },
   {
     "id": "I84",
@@ -1777,7 +2018,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I85",
@@ -1801,7 +2047,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I93",
@@ -1824,7 +2075,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 4
+    }
   },
   {
     "id": "I95",
@@ -1866,7 +2121,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 5,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 8.2
   },
   {
     "id": "I96",
@@ -1890,7 +2150,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I97",
@@ -1905,7 +2170,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 5
+    }
   },
   {
     "id": "I98",
@@ -1932,7 +2201,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 12
+    }
   },
   {
     "id": "I99",
@@ -1947,7 +2220,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 7,
+      "practical": 6
+    }
   },
   {
     "id": "I100",
@@ -1969,7 +2246,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 2.2
   },
   {
     "id": "I101",
@@ -1984,7 +2266,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 5
+    }
   },
   {
     "id": "I103",
@@ -2042,7 +2328,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 11.2
   },
   {
     "id": "I104",
@@ -2082,7 +2373,12 @@
           "end": "14:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 8.0
   },
   {
     "id": "I105",
@@ -2142,7 +2438,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 24.8
   },
   {
     "id": "I110",
@@ -2170,7 +2471,12 @@
           "end": "17:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 14.0
   },
   {
     "id": "I111",
@@ -2317,7 +2623,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 31,
+      "practical": 11
+    }
   },
   {
     "id": "I112",
@@ -2397,7 +2707,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 16
+    },
+    "availableHoursPerWeek": 31.5
   },
   {
     "id": "I115",
@@ -2416,7 +2731,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 16,
+      "practical": 2
+    }
   },
   {
     "id": "I116",
@@ -2431,7 +2750,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 9,
+      "practical": 4
+    }
   },
   {
     "id": "I117",
@@ -2446,7 +2769,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 6
+    }
   },
   {
     "id": "I118",
@@ -2480,7 +2807,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I120",
@@ -2508,7 +2840,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 3.8
   },
   {
     "id": "I122",
@@ -2542,7 +2879,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 11
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I123",
@@ -2602,7 +2944,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 9.8
   },
   {
     "id": "I124",
@@ -2630,7 +2977,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 3.8
   },
   {
     "id": "I126",
@@ -2657,7 +3009,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    }
   },
   {
     "id": "I127",
@@ -2691,7 +3047,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 6.8
   },
   {
     "id": "I128",
@@ -2727,7 +3088,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 7,
+      "practical": 6
+    },
+    "availableHoursPerWeek": 11.2
   },
   {
     "id": "I129",
@@ -2745,7 +3111,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 1.5
   },
   {
     "id": "I130",
@@ -2764,7 +3135,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 11,
+      "practical": 2
+    }
   },
   {
     "id": "I131",
@@ -2812,7 +3187,12 @@
           "end": "14:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 3,
+      "practical": 7
+    },
+    "availableHoursPerWeek": 13.5
   },
   {
     "id": "I132",
@@ -2887,7 +3267,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 11,
+      "practical": 17
+    }
   },
   {
     "id": "I134",
@@ -2902,7 +3286,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 6
+    }
   },
   {
     "id": "I136",
@@ -2929,7 +3317,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 7,
+      "practical": 17
+    }
   },
   {
     "id": "I137",
@@ -2984,7 +3376,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 23,
+      "practical": 6
+    }
   },
   {
     "id": "I138",
@@ -3019,7 +3415,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 11
+    }
   },
   {
     "id": "I139",
@@ -3054,7 +3454,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 11,
+      "practical": 7
+    }
   },
   {
     "id": "I140",
@@ -3081,7 +3485,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 16,
+      "practical": 5
+    }
   },
   {
     "id": "I141",
@@ -3100,7 +3508,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 5,
+      "practical": 3
+    }
   },
   {
     "id": "I142",
@@ -3163,7 +3575,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 14,
+      "practical": 9
+    }
   },
   {
     "id": "I144",
@@ -3234,7 +3650,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 11,
+      "practical": 10
+    }
   },
   {
     "id": "I145",
@@ -3253,7 +3673,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 5,
+      "practical": 3
+    }
   },
   {
     "id": "I146",
@@ -3276,7 +3700,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 7,
+      "practical": 5
+    }
   },
   {
     "id": "I147",
@@ -3291,7 +3719,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 3
+    }
   },
   {
     "id": "I149",
@@ -3319,7 +3751,12 @@
           "end": "14:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I151",
@@ -3347,7 +3784,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I152",
@@ -3387,7 +3829,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 7.5
   },
   {
     "id": "I153",
@@ -3421,7 +3868,12 @@
           "end": "14:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I159",
@@ -3451,7 +3903,12 @@
           "end": "13:45"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I161",
@@ -3473,7 +3930,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I162",
@@ -3488,7 +3950,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 12
+    }
   },
   {
     "id": "I163",
@@ -3511,7 +3977,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 8
+    }
   },
   {
     "id": "I164",
@@ -3530,7 +4000,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 7
+    }
   },
   {
     "id": "I165",
@@ -3545,7 +4019,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 3
+    }
   },
   {
     "id": "I168",
@@ -3580,7 +4058,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 3,
+      "practical": 16
+    }
   },
   {
     "id": "I169",
@@ -3663,7 +4145,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 28,
+      "practical": 8
+    }
   },
   {
     "id": "I170",
@@ -3697,7 +4183,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 8.2
   },
   {
     "id": "I177",
@@ -3721,7 +4212,12 @@
           "end": "08:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I179",
@@ -3749,7 +4245,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I182",
@@ -3799,7 +4300,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 12.0
   },
   {
     "id": "I183",
@@ -3833,7 +4339,12 @@
           "end": "08:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I184",
@@ -3867,7 +4378,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 3.8
   },
   {
     "id": "I186",
@@ -3907,7 +4423,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I189",
@@ -3930,7 +4451,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 6
+    }
   },
   {
     "id": "I190",
@@ -3949,7 +4474,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 2
+    }
   },
   {
     "id": "I191",
@@ -4007,7 +4536,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 12.8
   },
   {
     "id": "I192",
@@ -4049,7 +4583,12 @@
           "end": "17:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 21.0
   },
   {
     "id": "I193",
@@ -4111,7 +4650,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 21,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 9.8
   },
   {
     "id": "I194",
@@ -4143,7 +4687,12 @@
           "end": "13:45"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I195",
@@ -4167,7 +4716,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.0
   },
   {
     "id": "I199",
@@ -4185,7 +4739,12 @@
           "end": "15:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 2.2
   },
   {
     "id": "I201",
@@ -4203,7 +4762,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 1.5
   },
   {
     "id": "I202",
@@ -4227,7 +4791,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 9.8
   },
   {
     "id": "I203",
@@ -4245,7 +4814,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I204",
@@ -4269,7 +4843,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 15
+    },
+    "availableHoursPerWeek": 9.8
   },
   {
     "id": "I205",
@@ -4297,7 +4876,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I206",
@@ -4348,7 +4932,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 14
+    }
   },
   {
     "id": "I207",
@@ -4370,7 +4958,12 @@
           "end": "10:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I210",
@@ -4397,7 +4990,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    }
   },
   {
     "id": "I211",
@@ -4444,7 +5041,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 22,
+      "practical": 11
+    }
   },
   {
     "id": "I212",
@@ -4463,7 +5064,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 2
+    }
   },
   {
     "id": "I213",
@@ -4490,7 +5095,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 5,
+      "practical": 7
+    }
   },
   {
     "id": "I214",
@@ -4529,7 +5138,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 14,
+      "practical": 16
+    }
   },
   {
     "id": "I216",
@@ -4552,7 +5165,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 9
+    }
   },
   {
     "id": "I218",
@@ -4576,7 +5193,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I219",
@@ -4591,7 +5213,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    }
   },
   {
     "id": "I221",
@@ -4631,7 +5257,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 8
+    },
+    "availableHoursPerWeek": 7.5
   },
   {
     "id": "I222",
@@ -4662,7 +5293,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 3
+    }
   },
   {
     "id": "I223",
@@ -4677,7 +5312,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    }
   },
   {
     "id": "I225",
@@ -4724,7 +5363,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 4
+    }
   },
   {
     "id": "I226",
@@ -4759,7 +5402,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    }
   },
   {
     "id": "I229",
@@ -4783,7 +5430,12 @@
           "end": "13:45"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I230",
@@ -4938,7 +5590,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 25,
+      "practical": 17
+    }
   },
   {
     "id": "I231",
@@ -4969,7 +5625,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 8
+    }
   },
   {
     "id": "I232",
@@ -4992,7 +5652,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 6
+    }
   },
   {
     "id": "I233",
@@ -5024,7 +5688,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 7,
+      "practical": 6
+    },
+    "availableHoursPerWeek": 3.8
   },
   {
     "id": "I235",
@@ -5059,7 +5728,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 10
+    }
   },
   {
     "id": "I236",
@@ -5077,7 +5750,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 1.5
   },
   {
     "id": "I237",
@@ -5111,7 +5789,12 @@
           "end": "10:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I239",
@@ -5135,7 +5818,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 3.0
   },
   {
     "id": "I240",
@@ -5183,7 +5871,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 10.5
   },
   {
     "id": "I241",
@@ -5247,7 +5940,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 10
+    },
+    "availableHoursPerWeek": 23.2
   },
   {
     "id": "I242",
@@ -5265,7 +5963,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 2.2
   },
   {
     "id": "I244",
@@ -5293,7 +5996,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 9.0
   },
   {
     "id": "I246",
@@ -5317,7 +6025,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I247",
@@ -5341,7 +6054,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.0
   },
   {
     "id": "I248",
@@ -5375,7 +6093,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I249",
@@ -5403,7 +6126,12 @@
           "end": "13:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I250",
@@ -5431,7 +6159,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 6.8
   },
   {
     "id": "I253",
@@ -5449,7 +6182,12 @@
           "end": "12:15"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 2.2
   },
   {
     "id": "I254",
@@ -5491,7 +6229,12 @@
           "end": "11:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 6.0
   },
   {
     "id": "I255",
@@ -5517,7 +6260,12 @@
           "end": "14:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 4
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I256",
@@ -5544,7 +6292,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    }
   },
   {
     "id": "I257",
@@ -5580,7 +6332,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 11
+    },
+    "availableHoursPerWeek": 9.0
   },
   {
     "id": "I258",
@@ -5604,7 +6361,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 3
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I260",
@@ -5628,7 +6390,12 @@
           "end": "14:30"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 2
+    },
+    "availableHoursPerWeek": 4.5
   },
   {
     "id": "I261",
@@ -5652,7 +6419,12 @@
           "end": "16:00"
         }
       ]
-    }
+    },
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 5
+    },
+    "availableHoursPerWeek": 5.2
   },
   {
     "id": "I262",
@@ -5675,7 +6447,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 8
+    }
   },
   {
     "id": "I263",
@@ -5698,7 +6474,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 17,
+      "practical": 8
+    }
   },
   {
     "id": "I264",
@@ -5733,7 +6513,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 15,
+      "practical": 3
+    }
   },
   {
     "id": "I266",
@@ -5752,7 +6536,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 8
+    }
   },
   {
     "id": "I267",
@@ -5775,7 +6563,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 4,
+      "practical": 12
+    }
   },
   {
     "id": "I268",
@@ -5802,7 +6594,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 5
+    }
   },
   {
     "id": "I269",
@@ -5825,7 +6621,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 12,
+      "practical": 8
+    }
   },
   {
     "id": "I270",
@@ -5876,7 +6676,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 17,
+      "practical": 7
+    }
   },
   {
     "id": "I272",
@@ -5911,7 +6715,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 6
+    }
   },
   {
     "id": "I273",
@@ -5934,7 +6742,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 10,
+      "practical": 2
+    }
   },
   {
     "id": "I274",
@@ -5965,7 +6777,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 12,
+      "practical": 7
+    }
   },
   {
     "id": "I275",
@@ -6040,7 +6856,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 26,
+      "practical": 11
+    }
   },
   {
     "id": "I276",
@@ -6059,7 +6879,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 20,
+      "practical": 2
+    }
   },
   {
     "id": "I277",
@@ -6130,7 +6954,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 22,
+      "practical": 16
+    }
   },
   {
     "id": "I278",
@@ -6153,7 +6981,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 8,
+      "practical": 2
+    }
   },
   {
     "id": "I279",
@@ -6172,7 +7004,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 6,
+      "practical": 3
+    }
   },
   {
     "id": "I280",
@@ -6199,7 +7035,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 29
+    }
   },
   {
     "id": "I281",
@@ -6226,7 +7066,11 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 22
+    }
   },
   {
     "id": "I282",
@@ -6237,7 +7081,11 @@
         "coursetype": "Theory"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 2
+    }
   },
   {
     "id": "I283",
@@ -6252,6 +7100,10 @@
         "coursetype": "Practical"
       }
     ],
-    "availability": {}
+    "availability": {},
+    "maxLoad": {
+      "lecture": 2,
+      "practical": 4
+    }
   }
 ]

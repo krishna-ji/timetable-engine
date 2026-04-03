@@ -45,6 +45,8 @@ class Instructor:
     available_quanta: set[int] = field(default_factory=set)
     booked_quanta: set[int] = field(default_factory=set)
     max_hours_per_week: int = 40
+    max_load_lecture: int | None = None    # Max weekly quanta for L+T sessions
+    max_load_practical: int | None = None  # Max weekly quanta for P sessions
 
     def __post_init__(self) -> None:
         """Validate instructor data after initialization."""

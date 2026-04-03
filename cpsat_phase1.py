@@ -518,57 +518,11 @@ def build_phase1_model(
     # Already enforced: instructor booleans only exist for qualified instructors,
     # room booleans only exist for compatible rooms.
 
-    # ── Room Capacity Awareness (Phase A) ──
-    # Strategy depends on room_pool_limit:
-    #   0: pool-size-1 NoOverlap only (pure no-rooms mode)
-    #   >0: pool-size-1 NoOverlap + soft overlap penalties for pools 2..limit
-    #       (from schedule_threephase.py — proven to guide solver away from
-    #        room conflicts without making the model infeasible)
-    pool_cum_count = 0
-    penalty_vars: list[tuple[cp_model.IntVar, int]] = []
-    n_penalty_pairs = 0
-    if no_rooms:
-        # Hard constraint: pool-size-1 sessions must not overlap
-        for pool_key, mis in pool_to_mis.items():
-            pool_size = len(pool_key)
-            if pool_size != 1 or len(mis) <= 1:
-                continue
-            model.add_no_overlap([interval_vars[mi] for mi in mis])
-            pool_cum_count += 1
-
-        # Soft penalties: penalize overlapping sessions in small pools (2..limit)
-        # Turns it into an optimization model which is slower but produces better
-        # room-assignable solutions than hard room constraints.
-        if room_pool_limit > 0:
-            for pool_key, mis in pool_to_mis.items():
-                pool_size = len(pool_key)
-                if pool_size < 2 or pool_size > room_pool_limit:
-                    continue
-                if len(mis) <= pool_size:
-                    continue  # No contention possible
-
-                # Weight inversely proportional to pool size
-                weight = 10 * (room_pool_limit + 1 - pool_size)
-                for i in range(len(mis)):
-                    for j in range(i + 1, len(mis)):
-                        mi_a, mi_b = mis[i], mis[j]
-                        b_overlap = model.new_bool_var(f"olap_{mi_a}_{mi_b}")
-                        b_a_before_b = model.new_bool_var(f"ab_{mi_a}_{mi_b}")
-                        b_b_before_a = model.new_bool_var(f"ba_{mi_a}_{mi_b}")
-                        model.add(
-                            end_vars[mi_a] <= start_vars[mi_b]
-                        ).only_enforce_if(b_a_before_b)
-                        model.add(
-                            end_vars[mi_b] <= start_vars[mi_a]
-                        ).only_enforce_if(b_b_before_a)
-                        model.add(b_a_before_b + b_b_before_a + b_overlap >= 1)
-                        model.add(b_a_before_b + b_overlap <= 1)
-                        model.add(b_b_before_a + b_overlap <= 1)
-                        penalty_vars.append((b_overlap, weight))
-                        n_penalty_pairs += 1
-
-            if penalty_vars:
-                model.minimize(sum(w * v for v, w in penalty_vars))
+    # ── Room Capacity Awareness ──
+    # Deferred to Phase A' (cpsat_solver.py): after Phase A solves fast,
+    # pin day assignments and add cumulative constraints for small pools.
+    # Adding cumulative directly here makes the model intractable when
+    # combined with ICTD (SpreadAcrossDays).
 
     # ── InstructorMustBeAvailable — INTENTIONALLY DROPPED (Phase 1) ──
 
@@ -604,6 +558,83 @@ def build_phase1_model(
         for j in range(len(siblings) - 1):
             model.add(start_vars[siblings[j]] < start_vars[siblings[j + 1]])
 
+    # ── MaxLoadPermitted — cap instructor weekly teaching hours ──
+    # For each instructor with maxLoad data, enforce:
+    #   sum(duration * instr_bool) for lecture sessions ≤ max_load_lecture
+    #   sum(duration * instr_bool) for practical sessions ≤ max_load_practical
+    mlp_count = 0
+    instr_to_mi_by_type: dict[int, dict[str, list[int]]] = defaultdict(lambda: defaultdict(list))
+    for mi, orig_i in enumerate(model_indices):
+        s = sessions[orig_i]
+        for iidx in s.qualified_instructor_idxs:
+            if (mi, iidx) in instr_bool:
+                instr_to_mi_by_type[iidx][s.course_type].append(mi)
+
+    for iidx, type_mis in instr_to_mi_by_type.items():
+        iid = instructor_ids[iidx]
+        inst = store.instructors.get(iid)
+        if inst is None:
+            continue
+
+        # Lecture (theory) cap
+        if inst.max_load_lecture is not None and "theory" in type_mis:
+            theory_mis = type_mis["theory"]
+            load_expr = sum(
+                sessions[model_indices[mi]].duration * instr_bool[(mi, iidx)]
+                for mi in theory_mis
+            )
+            model.add(load_expr <= inst.max_load_lecture)
+            mlp_count += 1
+
+        # Practical cap
+        if inst.max_load_practical is not None and "practical" in type_mis:
+            prac_mis = type_mis["practical"]
+            load_expr = sum(
+                sessions[model_indices[mi]].duration * instr_bool[(mi, iidx)]
+                for mi in prac_mis
+            )
+            model.add(load_expr <= inst.max_load_practical)
+            mlp_count += 1
+
+    # ── Pool capacity for small room pools (in no_rooms mode) ──
+    # When rooms are deferred, Phase A is blind to room pools. Add:
+    # - NoOverlap for pools with 1 room (very cheap, like group NoOverlap)
+    # - Daily session-count limits for pools with 2-5 rooms (linear bounds)
+    # Note: Cumulative for pools with 2+ rooms causes TIMEOUT in full model.
+    pool_cap_count = 0
+    pool_daily_count = 0
+    if no_rooms:
+        for pool_key, mis in pool_to_mis.items():
+            pool_size = len(pool_key)
+            if len(mis) <= pool_size:
+                continue
+
+            if pool_size == 1:
+                model.add_no_overlap([interval_vars[mi] for mi in mis])
+                pool_cap_count += 1
+            elif pool_size <= 5:
+                # Daily session-count limits by duration group.
+                # For duration D in a pool of C rooms with Q quanta/day:
+                #   max sessions per day = floor(Q / D) * C
+                dur_groups: dict[int, list[int]] = defaultdict(list)
+                for mi in mis:
+                    dur_groups[sessions[model_indices[mi]].duration].append(mi)
+
+                for dur, dur_mis in dur_groups.items():
+                    max_per_day = (quanta_per_day // dur) * pool_size + 1  # +1 slack
+                    if len(dur_mis) <= max_per_day:
+                        continue  # Can't exceed limit even if all on same day
+                    for d in range(num_days):
+                        on_day = [
+                            model.new_bool_var(f"pd_{pool_key}_{mi}_{d}")
+                            for mi in dur_mis
+                        ]
+                        for j, mi in enumerate(dur_mis):
+                            model.add(day_vars[mi] == d).only_enforce_if(on_day[j])
+                            model.add(day_vars[mi] != d).only_enforce_if(on_day[j].negated())
+                        model.add(sum(on_day) <= max_per_day)
+                        pool_daily_count += 1
+
     # ── Summary ──
     n_room_bools = len(room_bool)
     n_instr_bools = len(instr_bool)
@@ -622,22 +653,21 @@ def build_phase1_model(
     print(f"\n  Constraints applied:")
     print(f"    NoStudentDoubleBooking:    {cte_count} groups")
     print(f"    NoInstructorDoubleBooking: {fte_count} instructors")
-    if no_rooms and room_pool_limit == 0:
-        print(f"    NoRoomDoubleBooking:       SKIPPED (Phase A — rooms deferred to Phase B)")
-    elif no_rooms and room_pool_limit > 0:
-        print(f"    NoRoomDoubleBooking:       {sre_count} rooms (pools ≤ {room_pool_limit})")
+    if no_rooms:
+        print(f"    NoRoomDoubleBooking:       deferred to Phase A' + Phase B")
     else:
         print(f"    NoRoomDoubleBooking:       {sre_count} rooms")
-    if no_rooms and pool_cum_count:
-        print(f"    RoomPoolCapacity:          {pool_cum_count} cumulative constraints")
-    if no_rooms and n_penalty_pairs:
-        print(f"    RoomPoolPenalties:         {n_penalty_pairs} overlap pairs across pools ≤ {room_pool_limit}")
     print(f"    InstructorMustBeQualified: via boolean domain")
     print(f"    RoomMustHaveFeatures:      {'deferred to Phase B' if no_rooms else 'via boolean domain'}")
     print(f"    InstructorMustBeAvailable: DROPPED (Phase 1)")
     print(f"    ExactWeeklyHours:          structural")
     print(f"    SpreadAcrossDays:          {ictd_count} sibling groups")
     print(f"    RequiresTwoInstructors:    {pmi_count} sessions")
+    print(f"    MaxLoadPermitted:          {mlp_count} constraints")
+    if no_rooms and pool_cap_count:
+        print(f"    PoolCapacity (1-room):     {pool_cap_count} pools")
+    if no_rooms and pool_daily_count:
+        print(f"    PoolDailyLimits (2-5):     {pool_daily_count} constraints")
 
     vars_dict = {
         "start": start_vars,
@@ -774,7 +804,7 @@ def solve_and_report(
     solver = cp_model.CpSolver()
     solver.parameters.max_time_in_seconds = time_limit
     solver.parameters.num_workers = 8
-    solver.parameters.log_search_progress = True
+    solver.parameters.log_search_progress = False
     if random_seed is not None:
         solver.parameters.random_seed = random_seed
 

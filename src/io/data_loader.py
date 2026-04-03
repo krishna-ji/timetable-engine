@@ -185,12 +185,19 @@ def load_instructors(path: str, qts: QuantumTimeSystem) -> dict[str, Instructor]
                     {"coursecode": course_entry, "coursetype": "Theory"}
                 )
 
+        # Parse maxLoad if present
+        max_load = item.get("maxLoad", {})
+        max_load_lecture = max_load.get("lecture") if max_load else None
+        max_load_practical = max_load.get("practical") if max_load else None
+
         instructors[item["id"]] = Instructor(
             instructor_id=item["id"],
             name=item["name"],
             qualified_courses=course_qualifications,
             is_full_time=is_full_time,
             available_quanta=available_quanta,
+            max_load_lecture=max_load_lecture,
+            max_load_practical=max_load_practical,
         )
     return instructors
 
@@ -235,11 +242,12 @@ def load_courses(
         tut = item.get("T", 0)
         prac = item.get("P", 0)
 
-        # Skip non-schedulable courses (zero L/T/P hours → no classroom sessions)
-        # Rationale: If a course has no lecture, tutorial, or practical hours,
-        # there is nothing to schedule (e.g. Survey Camp, Industrial Attachment).
-        # Courses with Credits=0 but valid L/T/P hours ARE still scheduled.
-        if lec == 0 and tut == 0 and prac == 0:
+        # Skip non-schedulable courses.
+        # Explicit flag takes priority; fall back to L+T+P == 0 heuristic.
+        needs_scheduling = item.get("NeedsScheduling", None)
+        if needs_scheduling is False or (
+            needs_scheduling is None and lec == 0 and tut == 0 and prac == 0
+        ):
             skipped_courses[course_code] = {
                 "L": int(lec),
                 "T": int(tut),
